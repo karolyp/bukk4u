@@ -3,7 +3,9 @@ Távoli VM elérése
 Windows alól, PuTTY-tyal
 0.	Töltsük le a PuTTY-ot, és ha magától nem telepítené, a puttygen nevű programot is.
 1.	Generáljunk egy SSH kulcsot a puttygen-nel.
-	*	Start -> puttygen -> Generate
+	*	Start -> puttygen
+	*	Adjunk meg egy nekünk tetsző felhasználónevet a "Key commentnél"
+	*	Majd Generate
 	*	Másoljuk ki a publikus kulcsot, és küldjétek át nekem, én pedig hozzáadom az authorized_keys-hez.
 	*	Save private key -> ezt is mentsük le (nem kell titkosítani)
 2.	Ha ez megvan megnyithatjuk a PuTTY-ot és az alábbiak alapján konfiguráljuk be:
