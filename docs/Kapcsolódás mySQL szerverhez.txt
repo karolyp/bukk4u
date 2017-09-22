@@ -1,0 +1,9 @@
+Kapcsolódás mySQL szerverhez
+
+1.	Külső programmal kapcsolódhatunk (pl. mySQL Workbench).
+2.	Az eléréshez SSH tunnel szükséges, mivel a mySQL szerver nincs kiengedve a VM-en kívülre.
+	*	PuTTY-ban:
+		*	Connection -> SSH -> Tunnels
+		*	Source port: 3306
+		*	Destination: localhost:XXXX (ide is jó a 3306, de tetszőlegesen változtaható)
+		*	Add

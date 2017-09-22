@@ -1,0 +1,13 @@
+Távoli VM elérése
+
+Windows alól, PuTTY-tyal
+0.	Töltsük le a PuTTY-ot, és ha magától nem telepítené, a puttygen nevű programot is.
+1.	Generáljunk egy SSH kulcsot a puttygen-nel.
+	*	Start -> puttygen -> Generate
+	*	Save public key -> valahova mentsük le
+	*	Save private key -> ezt is mentsük le (nem kell titkosítani)
+	*	Küldjétek át nekem az így kapott publikus kulcsot, én pedig hozzáadom az authorized_keys-hez.
+2.	Ha ez megvan megnyithatjuk a PuTTY-ot és az alábbiak alapján konfiguráljuk be:
+	*	Host Name: username@server_ip (jelenleg a server_ip=35.193.43.84)
+	*	Connection -> SSH -> Auth -> Private key file for authentication, ide tallózzuk be a PRIVÁT kulcsot
+3.	Ezután lehet kapcsolódni. Hogyha fájlátvitel is szükséges, ahhoz használjunk winSCP-t, amit hasonló módon kell bekonfigurálni.
