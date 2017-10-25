@@ -1,0 +1,23 @@
+@startuml
+actor Member
+participant GUI
+participant Server
+participant Database
+
+ref over Member, GUI, Server, Database : GetCart(Member ME)
+
+Member -> Member : Select Book TODELETE
+Member -> GUI : OnClickRemoveFromCartButton(Book TODELETE)
+activate GUI
+GUI -> Server : RequestRemoveFromCart(Book TODELETE)
+activate Server
+Server -> Database : DELETE Book FROM CART OF(Book TODELETE, Member ME)
+activate Database
+Database -> Server : Return TRUE
+deactivate Database
+Server -> GUI : Return TRUE
+deactivate Server
+GUI -> Member : Notify SUCCESS
+deactivate GUI
+
+@enduml 

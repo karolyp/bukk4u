@@ -1,0 +1,24 @@
+@startuml
+actor Guest
+participant GUI 
+participant Server
+participant Database
+Guest -> GUI: OnClickRegisterButton(string EMAIL, string PASS)
+GUI -> Server: SendRegistrationRequest(string EMAIL, string PASS)
+activate Server
+Server -> Database: tryInsert(string EMAIL, string PASS)
+activate Database
+alt successful case
+	Database -> Server: Return TRUE
+	deactivate Database	
+	Server -> GUI: Return TRUE
+	deactivate Server
+	GUI -> Guest: Notify Success
+else failure
+
+	Database -> Server: Return FALSE
+	Server -> GUI: Return FALSE
+	GUI -> Guest: Notify Failure
+	
+end
+@enduml 
