@@ -1,0 +1,19 @@
+@startuml
+actor Admin
+participant AdminGUI 
+participant Server
+participant Database
+
+ref over Admin, AdminGUI, Server, Database : GetOrders(INPUTFIELDS)
+Admin -> Admin : Select(ORDER rend)
+Admin -> AdminGUI: OnClickGetOrderStatusButton(ORDER rend)
+activate AdminGUI
+AdminGUI -> Server : RequestOrderInfo&Status(ORDER rend)
+activate Server
+Server -> Database : Query STATUS(ORDER rend)
+Database -> Server : Return STATUS stat
+Server -> AdminGUI : Return STATUS stat
+deactivate Server
+AdminGUI -> Admin : Display STATUS stat
+deactivate AdminGUI
+@enduml 

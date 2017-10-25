@@ -1,0 +1,18 @@
+@startuml
+actor Member
+participant GUI 
+participant Server
+participant Database
+Member -> GUI: OnClickGetCartButton
+activate GUI
+GUI -> Server: GetUserCart(User MEMBER)
+activate Server
+Server -> Database: GET CART(User MEMBER)
+activate Database
+Database -> Server: Return LIST of CART
+deactivate Database
+Server -> GUI: Return LIST of CART
+deactivate Server
+GUI -> Member: Show LIST of CART
+deactivate GUI
+@enduml 

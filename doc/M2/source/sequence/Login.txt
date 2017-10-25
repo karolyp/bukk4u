@@ -1,0 +1,33 @@
+@startuml
+actor Guest	
+participant GUI 
+participant Server
+participant Database
+
+Guest -> GUI: OnClickLoginButton(string EMAIL, string PASS)
+GUI -> Server: SendLoginRequest(string EMAIL, string PASS)
+activate Server
+Server -> Database: SELECT(string EMAIL, string PASS)
+activate Database
+alt successful case
+	Database -> Server: Return USERDATA
+	deactivate Database
+	Server -> Server: Assign COOKIE
+	alt ADMIN
+		Server -> GUI: Return ADMIN USERDATA 
+		deactivate Server
+		GUI -> Guest: Change SCREEN to ADMIN
+	else USER
+		Server -> GUI: Return USERDATA
+		deactivate Server
+		GUI -> Guest: Change SCREEN to USER
+	end	
+else failure
+	Database -> Server: Return FALSE
+	deactivate Database
+	Server -> GUI: Return FALSE
+	deactivate Server
+	GUI -> Guest: Notify Failure
+	
+end
+@enduml 

@@ -1,0 +1,35 @@
+@startuml
+actor Admin
+participant AdminGUI 
+participant Server
+participant Database
+
+ref over Admin, AdminGUI, Server, Database : GetOrders(INPUTFIELDS)
+Admin -> Admin : Select(ORDER rend)
+Admin -> AdminGUI: OnClickSetOrderStatusButton(ORDER rend)
+activate AdminGUI
+AdminGUI -> Admin : Display POSSIBLE OPTIONS
+deactivate AdminGUI
+Admin -> Admin : Select Options as INPUT
+Admin -> AdminGUI : OnClickConfirm(INPUT)
+activate AdminGUI
+AdminGUI -> Server : RequestOrderStatusSet(ORDER rend, Status INPUT)
+activate Server
+alt IF INPUT = COMPLETE || ARCHIVE
+Server -> Database : Modify ORDER(ORDER rend, Status Input)
+activate Database
+Database -> Database : Modify (...)
+Database -> Server : Return TRUE
+deactivate Database
+Server -> AdminGUI : Return TRUE
+deactivate Server
+AdminGUI -> Admin : Notify SUCCESS
+deactivate AdminGUI
+else IF INPUT = DELETE
+Server -> Database : Delete ORDER(ORDER rend)
+Database -> Database : Delete ORDER(...)
+Database -> Server : Return TRUE
+Server -> AdminGUI : Return TRUE
+AdminGUI -> Admin : Notify SUCCESS
+end
+@enduml 

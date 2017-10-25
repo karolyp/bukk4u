@@ -1,0 +1,26 @@
+@startuml
+actor Member
+participant GUI 
+participant Server
+participant Database
+ref over Member, GUI, Server, Database : ListBooks(filter MYFILTER)
+
+Member -> Member : Select books
+Member -> GUI : OnReviewButtonClicked(Book WHAT, REVIEWINFO)
+activate GUI
+GUI -> Member : Show Review Panel
+deactivate GUI
+Member -> GUI : CLickConfirmReview(Book WHAT, REVIEWINFO)
+activate GUI
+GUI -> Server : PostReviewAbout(Book WHAT, REVIEWINFO)
+activate Server
+Server -> Database : Insert REVIEW ABOUT(Book WHAT, REVIEWINFO)
+activate Database
+Database -> Database : Recalculate Avg Rating
+Database -> Server : Return TRUE
+deactivate Database
+Server -> GUI : Return TRUE
+deactivate Server
+GUI -> Member : Notify SUCCESS
+deactivate GUI
+@enduml 

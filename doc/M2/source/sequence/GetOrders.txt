@@ -1,0 +1,24 @@
+@startuml
+actor Admin
+participant AdminGUI 
+participant Server
+participant Database
+Admin -> AdminGUI: OnClickManageOrdersButton
+activate AdminGUI
+AdminGUI -> Admin : Return INPUTFIELDS as FILTER
+deactivate AdminGUI
+Admin -> AdminGUI : OnClickGetOrdersButton(Filter INPUTFIELDS)
+activate AdminGUI
+AdminGUI -> Server : RequestOrdersWithFilter(Filter INPUTFIELDS)
+activate Server
+Server -> Database : Query ORDERS(Filter INPUTFIELDS)
+activate Database
+Database -> Database : Apply FILTER(INPUTFIELDS)
+Database -> Server : Return LIST
+deactivate Database
+Server -> AdminGUI : Return LIST
+deactivate Server
+AdminGUI -> Admin : Show LIST
+deactivate AdminGUI
+
+@enduml 
