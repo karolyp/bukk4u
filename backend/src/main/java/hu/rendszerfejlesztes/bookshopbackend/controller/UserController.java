@@ -1,5 +1,6 @@
 package hu.rendszerfejlesztes.bookshopbackend.controller;
 
+import com.google.common.collect.Lists;
 import hu.rendszerfejlesztes.bookshopbackend.controller.beans.Response;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
 import hu.rendszerfejlesztes.bookshopbackend.service.UserService;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/api")
@@ -24,6 +27,18 @@ public class UserController {
     public ResponseEntity<Response> saveUser(@RequestBody User user){
         userService.saveUser(user);
         return ResponseEntity.ok(Response.successWithMessage("User successfully registered."));
+    }
+
+    @RequestMapping(path = "/usersWithoutPassword", method = RequestMethod.GET)
+    @ResponseBody
+    public List<User> getUsersWithoutPassword(){
+        return userService.getUsersWithoutPassword();
+    }
+
+    @RequestMapping(path = "/users", method = RequestMethod.GET)
+    @ResponseBody
+    public List<User> getUsers(){
+        return userService.getUsers();
     }
 
 }

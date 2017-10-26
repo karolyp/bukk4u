@@ -1,6 +1,7 @@
 package hu.rendszerfejlesztes.bookshopbackend.dao.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
@@ -22,14 +23,18 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRole userRole;
 
+    @Transient
+    private boolean passwordEncrtyped;
+
     public User() {
     }
 
-    public User(String fullName, String email, String password, String address) {
+    public User(String fullName, String email, String password, String address, UserRole userRole) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.address = address;
+        this.userRole = userRole;
     }
 
     public Integer getId() {
@@ -78,6 +83,16 @@ public class User {
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }
+
+    @JsonIgnore
+    public boolean isPasswordEncrtyped() {
+        return passwordEncrtyped;
+    }
+
+    @JsonProperty
+    public void setPasswordEncrtyped(boolean passwordEncrtyped) {
+        this.passwordEncrtyped = passwordEncrtyped;
     }
 
     @Override
