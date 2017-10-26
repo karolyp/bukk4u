@@ -1,6 +1,7 @@
 package hu.rendszerfejlesztes.bookshopbackend;
 
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.UserRole;
 import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.UserRepository;
 import hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils;
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ import static hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils.getMD5
 @EnableJpaRepositories
 public class BookshopBackendApplication extends SpringBootServletInitializer {
 
-    private static final Logger LOGGER  = LoggerFactory.getLogger(BookshopBackendApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookshopBackendApplication.class);
     private static Class<BookshopBackendApplication> applicationClass = BookshopBackendApplication.class;
 
     public static void main(String[] args) {
@@ -30,4 +31,12 @@ public class BookshopBackendApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(applicationClass);
     }
+
+    @Bean
+    protected CommandLineRunner init(UserRepository userRepository) {
+        return args -> {
+            userRepository.save(new User("Admin", "admin@bukk4u", EncryptionUtils.getMD5HashString("admin"), "noaddress", UserRole.ADMIN));
+        };
+    }
+
 }
