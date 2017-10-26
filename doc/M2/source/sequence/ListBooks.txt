@@ -1,0 +1,17 @@
+@startuml
+actor Guest
+participant GUI 
+participant Server
+participant Database
+Guest -> GUI: OnClickListBooksButton(filter MYFILTER)
+GUI -> Server: GetBooksWithFilter(filter MYFILTER)
+activate Server
+Server -> Database: SELECT BOOKS(filter MYFILTER)
+activate Database
+Database -> Database: APPLY(filter MYFILTER)
+Database -> Server: Return LIST
+deactivate Database
+Server -> GUI: Return LIST
+deactivate Server
+GUI -> Guest: Show LIST
+@enduml 

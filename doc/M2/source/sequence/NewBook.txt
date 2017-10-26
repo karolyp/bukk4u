@@ -1,0 +1,31 @@
+@startuml
+actor Admin
+participant AdminGUI
+participant Server
+participant Database
+
+Admin -> Admin : Input ALL DATA
+Admin -> AdminGUI : OnSendAddNewBookButton(ALL DATA)
+AdminGUI -> Server : RequestAddNewBook(ALL DATA)
+activate Server
+Server -> Server : Validate(ALL DATA as Book B)
+alt VALID
+	Server -> Database : Exists(Book B)
+	activate Database	
+	alt NOT Exists
+		Database -> Database : Add new Book(ALL DATA as Book)
+		Database -> Server : Return TRUE
+		deactivate Database
+		Server -> AdminGUI : Return TRUE
+		deactivate Server
+		AdminGUI -> Admin : Notify SUCCESS
+	else ALREADY Exists
+		Database -> Server : Return FALSE
+		Server -> AdminGUI : Return FALSE
+		AdminGUI -> Admin : Notify FAILURE
+	end
+else INVALID
+	Server -> AdminGUI: Return FALSE
+	AdminGUI -> Admin: Notify FAILURE
+end
+@enduml 

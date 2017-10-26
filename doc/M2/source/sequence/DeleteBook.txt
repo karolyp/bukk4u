@@ -1,0 +1,31 @@
+@startuml
+actor Admin
+participant AdminGUI
+participant Server
+participant Database
+
+ref over Admin, AdminGUI, Server, Database : ListBooks(filter MYFILTER)
+
+Admin -> Admin : Select Book TODELETE
+Admin -> AdminGUI : OnClickRemoveBookButton(Book TODELETE)
+AdminGUI -> Server : RequestDeleteBook(Book TODELETE)
+activate Server
+Server -> Database : Query EXISTS(Book TODELETE)
+activate Database
+alt EXISTS
+	Database -> Server : Return TRUE
+	Server -> Database : DELETE Book(TODELETE)
+	Database -> Database : DELETE Book(TODELETE)
+	Database -> Server : Return TRUE
+	deactivate Database	
+	Server -> AdminGUI : Return TRUE
+	deactivate Server	
+	AdminGUI -> Admin : Notify SUCCESS
+else NOT Exists
+	Database -> Server : Return FALSE
+	deactivate Database	
+	Server -> AdminGUI : Return FALSE
+	deactivate Server	
+	AdminGUI -> Admin : Notify FAILURE
+end
+@enduml 

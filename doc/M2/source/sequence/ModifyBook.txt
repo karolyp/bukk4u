@@ -1,0 +1,39 @@
+@startuml
+actor Admin
+participant AdminGUI
+participant Server
+participant Database
+
+ref over Admin, AdminGUI, Server, Database : ListBooks(filter MYFILTER)
+
+Admin -> Admin : Select Book TOMODIFY
+Admin -> AdminGUI : OnClickModifyBookButton(Book TOMODIFY)
+activate AdminGUI
+AdminGUI -> Admin : Display INPUTFIELDS
+deactivate AdminGUI
+Admin -> AdminGUI : OnClickConfirmModify(Book TOMODIFY, info INPUTFIELDS)
+activate AdminGUI
+AdminGUI -> Server : RequestModifyBook(Book TOMODIFY, info INPUTFIELDS)
+activate Server
+Server -> Database : Query EXISTS(Book TOMODIFY)
+activate Database
+alt EXISTS		
+	Database -> Server : Return TRUE
+	deactivate Database	
+	Server -> Database : Modify Book(TOMODIFY, INPUTFIELDS)
+	activate Database
+	Database -> Database : Modify(TOMODIFY, INPUTFIELDS)	
+	Database -> Server : Return TRUE
+	deactivate Database
+	Server -> AdminGUI : Return TRUE
+	deactivate Server	
+	AdminGUI -> Admin : Notify SUCCESS
+	deactivate AdminGUI
+else NOT Exists
+	Database -> Server : Return FALSE
+	deactivate Database	
+	Server -> AdminGUI : Return FALSE
+	deactivate Server	
+	AdminGUI -> Admin : Notify FAILURE
+end
+@enduml  

@@ -1,0 +1,27 @@
+@startuml
+actor Member
+participant GUI 
+participant Server
+participant Database
+ref over Member, GUI, Server, Database : ListBooks(filter MYFILTER)
+
+Member -> Member : Select book
+Member -> GUI : OnClickToFAVOURITEButton(Book WHAT)
+activate GUI
+GUI -> Server : RequestSetAsFavourite(Book WHAT, Member ME)
+Server -> Database : Query EXISTS as Favourite (Book WHAT, Member ME)
+activate Server
+alt NOT Exists
+Database -> Server : Return FALSE
+Server -> Database : Insert FAVOURITE(Book WHAT, Member ME)
+Database -> Server : Return TRUE
+Server -> GUI : Return TRUE
+deactivate Server
+GUI -> Member : Notify SUCCESS
+deactivate GUI
+else Exists
+	Database -> Server : Return TRUE
+	Server -> GUI : Return FALSE
+	GUI -> Member : Notify FAILURE (ALREADY FAV)
+end
+@enduml 

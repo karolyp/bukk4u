@@ -1,0 +1,32 @@
+@startuml
+actor Member
+participant GUI 
+participant Server
+participant Database
+ref over Member, GUI, Server, Database : ListBooks(filter MYFILTER)
+
+Member -> Member : Select books
+Member -> GUI : OnToCartButtonClicked(Book WHAT, int COUNT)
+GUI -> Server : RequestPutIntoCart(Book WHAT, int COUNT)
+activate Server
+Server -> Database : QueryHasEnoughOf(Book WHAT, int COUNT)
+activate Database
+alt Has Enough Book
+	Database -> Server : Return TRUE
+	Server -> Database : PutIntoCart(Member WHO, Book WHAT, int COUNT)
+	Database -> Database : DecrementBookAvailability(Book WHAT, int MANY)	
+	Database -> Server : Return TRUE
+	deactivate Database	
+	Server -> GUI : Return TRUE
+	deactivate Server
+	ref over GUI, Server, Database : GetCart
+	GUI -> Member : Notify SUCCESS, Modify CART
+else Not Enough Book
+	Database -> Server : Return FALSE
+	deactivate Database		
+	Server -> GUI : Return FALSE
+	deactivate Server
+	GUI -> Member : Notify FAILURE
+end
+
+@enduml 
