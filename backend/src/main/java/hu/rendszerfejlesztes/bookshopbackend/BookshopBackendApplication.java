@@ -30,17 +30,4 @@ public class BookshopBackendApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(applicationClass);
     }
-
-    @Bean
-    public CommandLineRunner loadData(UserRepository userRepository) {
-        return args -> {
-            userRepository.save(new User("Fekete Jozsi", "jozsi@teszt.hu", getMD5HashString("jozsipass"), "6666 Kamut"));
-            userRepository.save(new User("Sós Julcsi", "julcsi@teszt.hu", getMD5HashString("julcsipass"), "6666 Kamut"));
-            userRepository.save(new User("Kovács Mari", "jozsi@teszt.hu", getMD5HashString("maripass"), "6666 Kamut"));
-
-            LOGGER.info("Users with findAll()");
-            userRepository.findAll().forEach(u -> LOGGER.info(u.toString()));
-
-        };
-    }
 }

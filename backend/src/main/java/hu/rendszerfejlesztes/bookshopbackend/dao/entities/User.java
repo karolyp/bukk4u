@@ -1,12 +1,10 @@
 package hu.rendszerfejlesztes.bookshopbackend.dao.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -14,11 +12,15 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class User {
     @Id
     @GeneratedValue(strategy = IDENTITY)
+    @JsonIgnore
     private Integer id;
     private String fullName;
     private String email;
     private String password;
     private String address;
+
+    @Enumerated(value = EnumType.STRING)
+    private UserRole userRole;
 
     public User() {
     }
@@ -70,6 +72,14 @@ public class User {
         this.address = address;
     }
 
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -78,6 +88,7 @@ public class User {
                 .add("email", email)
                 .add("password", password)
                 .add("address", address)
+                .add("userRole", userRole)
                 .toString();
     }
 }
