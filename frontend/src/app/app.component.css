@@ -1,0 +1,7 @@
+.example-fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.header div {
+  padding-right: 10px;
+}

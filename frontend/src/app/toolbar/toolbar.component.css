@@ -1,0 +1,15 @@
+.toolbar-item {
+  padding: 0px 10px;
+}
+
+.logo {
+  font-weight: bold;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.search {
+  width: 500px;
+}
