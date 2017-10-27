@@ -1,9 +1,16 @@
+mat-toolbar{
+  background-color: #1740a5;
+  color: white;
+}
+
 .toolbar-item {
   padding: 0px 10px;
 }
 
 .logo {
+  padding-bottom: 10px;
   font-weight: bold;
+  font-size: 30px;
 }
 
 .fill-remaining-space {
@@ -13,3 +20,10 @@
 .search {
   width: 500px;
 }
+/deep/ .mat-input-underline {
+  background-color: white;
+}
+/deep/ .mat-input-placeholder{
+  color: white;
+}
+
