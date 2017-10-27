@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatCheckboxModule, MatMenuModule, MatIconModule, MatButtonModule, MatFormFieldModule,
-  MatInputModule, MatToolbarModule, MatDialogModule
+  MatInputModule, MatToolbarModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule
 } from '@angular/material';
 
 import {NgbModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
@@ -12,10 +12,10 @@ import {ToolbarComponent} from './toolbar/toolbar.component';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthenticationService} from "./_service/authentication.service";
+import {HttpModule} from "@angular/http";
 
-const appRoutes: Routes = [
-
-];
+const appRoutes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -26,21 +26,24 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     MatDialogModule,
+    MatSnackBarModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
     MatMenuModule,
+    MatProgressBarModule,
     MatToolbarModule,
     MatIconModule,
     NgbModule.forRoot(),
     NgbAlertModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]
 })

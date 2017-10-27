@@ -5,7 +5,7 @@
   <div>
     <form class="loginForm center">
       <mat-form-field class="form-item">
-        <input matInput placeholder="E-mail cím" [formControl]="emailFormControl">
+        <input matInput placeholder="E-mail cím" [formControl]="emailFormControl" [(ngModel)]="model.email"/>
         <mat-error *ngIf="emailFormControl.hasError('pattern')">
           Valós e-mail címet adj meg!
         </mat-error>
@@ -15,7 +15,8 @@
       </mat-form-field>
 
       <mat-form-field class="form-item">
-        <input matInput placeholder="Jelszó" type="password" [formControl]="passwordFormControl"/>
+        <input matInput placeholder="Jelszó" type="password" [formControl]="passwordFormControl"
+               [(ngModel)]="model.password"/>
         <mat-error *ngIf="passwordFormControl.hasError('required')">
           Az jelszó mező <strong>kötelező!</strong>
         </mat-error>
@@ -24,7 +25,10 @@
       <div class="bottom-form">
         <div align="right" class="btn-line">
           <button mat-raised-button class="pointer" color="primary">Elfelejtett jelszó</button>
-          <button mat-raised-button class="pointer" color="primary">Belépés</button>
+          <button mat-raised-button class="pointer" color="primary" (click)="login($event)"
+                  [disabled]="emailFormControl.hasError('required') || emailFormControl.hasError('pattern') || passwordFormControl.hasError('required')">
+            Belépés
+          </button>
         </div>
         <div align="right" class="btn-line">
           Nincs még fiókod?
@@ -33,5 +37,8 @@
       </div>
 
     </form>
+  </div>
+  <div *ngIf="loading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
 </div>
