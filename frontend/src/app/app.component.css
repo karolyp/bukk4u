@@ -6,3 +6,9 @@
   padding-right: 10px;
 }
 
+sidebar {
+  background-color: #444444;
+  min-height: 100%;
+  min-width: 300px;
+}
+
