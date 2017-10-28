@@ -10,6 +10,7 @@ import {LoginComponent} from "../login/login.component";
 export class ToolbarComponent {
   animal: string;
   name: string;
+  cartBalance: number = 0;
 
   constructor(public dialog: MatDialog) {}
 
@@ -18,6 +19,10 @@ export class ToolbarComponent {
       height: '400px',
       width: '600px',
     });
+  }
+
+  cartClicked($event): void{
+    // TODO: Switch to the cart page
   }
 
 }

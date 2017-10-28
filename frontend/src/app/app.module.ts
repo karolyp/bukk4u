@@ -14,6 +14,7 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthenticationService} from "./_service/authentication.service";
 import {HttpModule} from "@angular/http";
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 const appRoutes: Routes = [];
 
@@ -21,7 +22,8 @@ const appRoutes: Routes = [];
   declarations: [
     AppComponent,
     ToolbarComponent,
-    LoginComponent
+    LoginComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

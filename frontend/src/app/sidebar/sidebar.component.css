@@ -1,0 +1,6 @@
+.sidebar {
+  background-color: #444444;
+  height: 100%;
+  width: 20%;   /* itt mukodik a %, de magassagnal nem...
+                a %-ot a szulohoz kepest allitja be, de mi a szulo? */
+}
