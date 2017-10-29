@@ -3,7 +3,8 @@ import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatCheckboxModule, MatMenuModule, MatIconModule, MatButtonModule, MatFormFieldModule,
-  MatInputModule, MatToolbarModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule
+  MatInputModule, MatToolbarModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule,
+  MatSliderModule
 } from '@angular/material';
 
 import {NgbModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
@@ -38,6 +39,7 @@ const appRoutes: Routes = [];
     MatProgressBarModule,
     MatToolbarModule,
     MatIconModule,
+    MatSliderModule,
     NgbModule.forRoot(),
     NgbAlertModule.forRoot(),
     RouterModule.forRoot(appRoutes),

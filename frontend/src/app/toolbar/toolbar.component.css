@@ -1,5 +1,5 @@
 mat-toolbar{
-  background-color: #1740a5;
+  background-color: #4169cc;
   color: white;
 }
 
@@ -9,8 +9,9 @@ mat-toolbar{
 
 .logo {
   padding-bottom: 10px;
+  margin-left: 30px;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .fill-remaining-space {
@@ -27,5 +28,8 @@ mat-toolbar{
   color: white;
   padding-left: 15px;
   font-size: 20px;
+}
+.toolbar-item/deep/.mat-input-ripple{
+  background-color: #40edc9;
 }
 
