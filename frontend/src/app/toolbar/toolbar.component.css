@@ -30,6 +30,6 @@ mat-toolbar{
   font-size: 20px;
 }
 .toolbar-item/deep/.mat-input-ripple{
-  background-color: #40edc9;
+  background-color: #e5e5e5;
 }
 

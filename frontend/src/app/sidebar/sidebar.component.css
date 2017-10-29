@@ -1,25 +1,18 @@
-.label{
+.label {
   background-color: #3b3b3b;
-  padding-top: 6px;
-  padding-bottom: 6px;
   text-align: center;
   font-size: 25px;
-   /*font-weight: bold; */
-
+  /*font-weight: bold; */
+  margin-top: 10px;
 }
 
-ul{
-  list-style: none;
+.category {
+  margin-top: 10px;
 }
-li{
-  padding-left: 30px;
+
+.category button {
+  width: 100%;
   font-size: 18px;
-  margin-top: 6px;
-  color: #f6f6f6;
-
-}
-.categories{
-  margin: 30px 0px 30px 0px;
 }
 
 mat-slider {
@@ -27,25 +20,25 @@ mat-slider {
   padding-left: 20px;
 }
 
-/deep/.mat-accent .mat-slider-track-fill {
+/deep/ .mat-accent .mat-slider-track-fill {
   background-color: #b8ffaa;
 }
 
-/deep/.mat-accent .mat-slider-thumb {
+/deep/ .mat-accent .mat-slider-thumb {
   background-color: #b8ffaa;
 }
 
-/deep/.mat-accent .mat-slider-thumb-label {
+/deep/ .mat-accent .mat-slider-thumb-label {
   background-color: #50b252;
 
 }
 
-.slider{
+.slider {
   text-align: center;
   margin-left: 20px;
 }
 
-.slidervalue{
+.slidervalue {
   margin-top: 10px;
   color: #b8ffaa;
   font-size: 20px;
@@ -54,6 +47,7 @@ mat-slider {
 a:link, a:visited {
   text-decoration: none;
 }
+
 a:hover, a:active {
   text-decoration-color: white;
 }

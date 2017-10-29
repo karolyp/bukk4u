@@ -3,13 +3,9 @@
     Kategóriák
   </div>
   <div class="categories">
-    <ul>
-      <a href="#"
-         *ngFor="let kategoria of categories">
-        <li>{{kategoria}}</li>
-      </a>
-
-    </ul>
+    <div class="category" *ngFor="let category of categories">
+      <button mat-button>{{category}}</button>
+    </div>
   </div>
   <div class="label">
     Maximum ár
@@ -20,6 +16,3 @@
     <mat-slider [max]="maxPrice" [value]="value" [step]="steps" #matslider></mat-slider>
 
   </div>
-
-
-</div>

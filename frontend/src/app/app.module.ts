@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatCheckboxModule, MatMenuModule, MatIconModule, MatButtonModule, MatFormFieldModule,
-  MatInputModule, MatToolbarModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule,
+  MatInputModule, MatToolbarModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule, MatSidenavModule,
   MatSliderModule
 } from '@angular/material';
 
@@ -13,8 +13,8 @@ import {ToolbarComponent} from './toolbar/toolbar.component';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthenticationService} from "./_service/authentication.service";
-import {HttpModule} from "@angular/http";
+import {AuthenticationService} from './_service/authentication.service';
+import {HttpModule} from '@angular/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import 'hammerjs';
 
@@ -35,6 +35,7 @@ const appRoutes: Routes = [];
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatButtonModule,
+    MatSidenavModule,
     MatInputModule,
     MatFormFieldModule,
     MatMenuModule,
