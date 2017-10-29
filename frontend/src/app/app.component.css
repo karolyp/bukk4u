@@ -7,7 +7,7 @@
 }
 
 sidebar {
-  position: fixed;
+  position: absolute;
   alignment: left;
   background-color: #666666;
   min-height: 100vh;

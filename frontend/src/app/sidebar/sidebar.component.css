@@ -23,5 +23,37 @@ li{
 }
 
 mat-slider {
-  width: 200px;
+  width: 220px;
+  padding-left: 20px;
+}
+
+/deep/.mat-accent .mat-slider-track-fill {
+  background-color: #b8ffaa;
+}
+
+/deep/.mat-accent .mat-slider-thumb {
+  background-color: #b8ffaa;
+}
+
+/deep/.mat-accent .mat-slider-thumb-label {
+  background-color: #50b252;
+
+}
+
+.slider{
+  text-align: center;
+  margin-left: 20px;
+}
+
+.slidervalue{
+  margin-top: 10px;
+  color: #b8ffaa;
+  font-size: 20px;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+}
+a:hover, a:active {
+  text-decoration-color: white;
 }

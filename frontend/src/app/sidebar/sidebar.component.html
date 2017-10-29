@@ -4,10 +4,10 @@
   </div>
   <div class="categories">
     <ul>
-      <li>Science fiction</li>
-      <li>Dráma</li>
-      <li>Akció</li>
-      <li>Kaland</li>
+      <a href="#"
+         *ngFor="let kategoria of categories">
+        <li>{{kategoria}}</li>
+      </a>
 
     </ul>
   </div>
@@ -15,6 +15,11 @@
     Maximum ár
   </div>
 
-<mat-slider></mat-slider>
+  <div class="slider">
+    <p class="slidervalue">{{matslider.value}} Ft</p>
+    <mat-slider [max]="maxPrice" [value]="value" [step]="steps" #matslider></mat-slider>
+
+  </div>
+
 
 </div>

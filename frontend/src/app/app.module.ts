@@ -16,6 +16,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthenticationService} from "./_service/authentication.service";
 import {HttpModule} from "@angular/http";
 import { SidebarComponent } from './sidebar/sidebar.component';
+import 'hammerjs';
+
 
 const appRoutes: Routes = [];
 
