@@ -18,7 +18,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public void saveUser(User user) {
-        if (!user.isPasswordEncrtyped()) {
+        if(!user.isPasswordEncrtyped()){
             user.setPassword(EncryptionUtils.getMD5HashString(user.getPassword()));
         }
 
@@ -36,14 +36,5 @@ public class UserService {
         }).collect(Collectors.toList());
     }
 
-    public User getUser(String email, String password) {
-        for (User u : getUsers()) {
-            if (u.getEmail().equals(email) && u.getPassword().equals(EncryptionUtils.getMD5HashString(password))) {
-                return u;
-            }
-        }
-
-        return null;
-    }
 
 }

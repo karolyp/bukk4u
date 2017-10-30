@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -25,36 +24,21 @@ public class UserController {
     // TODO: detect if user already exists
     @RequestMapping(path = "/user", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Response> saveUser(@RequestBody User user) {
+    public ResponseEntity<Response> saveUser(@RequestBody User user){
         userService.saveUser(user);
         return ResponseEntity.ok(Response.successWithMessage("User successfully registered."));
     }
 
     @RequestMapping(path = "/usersWithoutPassword", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> getUsersWithoutPassword() {
+    public List<User> getUsersWithoutPassword(){
         return userService.getUsersWithoutPassword();
     }
 
     @RequestMapping(path = "/users", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> getUsers() {
+    public List<User> getUsers(){
         return userService.getUsers();
-    }
-
-    @RequestMapping(path = "/user", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<User> getUser(HttpServletRequest request) {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User u = userService.getUser(email, password);
-
-        if (u != null) {
-            return ResponseEntity.ok(u);
-        } else {
-            return ResponseEntity.badRequest().body(null); // TODO: szépíteni
-        }
-
     }
 
 }
