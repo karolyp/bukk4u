@@ -7,12 +7,35 @@
 }
 
 sidebar {
-  position: absolute;
-  alignment: left;
+  float:left;
   background-color: #666666;
   min-height: 100vh;
   width: 20%;
+  min-width: 150px;
   padding: 20px 20px 20px 0px;
   color: #cfccd6;
 }
 
+.background{
+  float: left;
+  width: 80%;
+  min-height: 100%;     /* rohadjon meg amiert nem megy */
+  /*background-color: #eeeeee;*/
+  padding: 30px;
+  overflow: hidden;
+}
+
+.content{
+  border-style: solid;
+  border-color: #505050;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 30px;
+  background-color: white;
+
+}
+
+.wrapper{
+  overflow: hidden;
+  height: 100%;
+}

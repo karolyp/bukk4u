@@ -4,8 +4,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatCheckboxModule, MatMenuModule, MatIconModule, MatButtonModule, MatFormFieldModule,
   MatInputModule, MatToolbarModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule, MatSidenavModule,
-  MatSliderModule
+  MatSliderModule, MatDatepickerModule
 } from '@angular/material';
+
 
 import {NgbModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent} from './app.component';
@@ -17,7 +18,7 @@ import {AuthenticationService} from './_service/authentication.service';
 import {HttpModule} from '@angular/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import 'hammerjs';
-
+import { RegistrationComponent } from './registration/registration.component';
 
 const appRoutes: Routes = [];
 
@@ -26,7 +27,8 @@ const appRoutes: Routes = [];
     AppComponent,
     ToolbarComponent,
     LoginComponent,
-    SidebarComponent
+    SidebarComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,7 @@ const appRoutes: Routes = [];
     MatToolbarModule,
     MatIconModule,
     MatSliderModule,
+    MatDatepickerModule,
     NgbModule.forRoot(),
     NgbAlertModule.forRoot(),
     RouterModule.forRoot(appRoutes),
