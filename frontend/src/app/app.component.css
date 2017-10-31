@@ -7,7 +7,7 @@
 }
 
 sidebar {
-  float:left;
+  float: left;
   background-color: #666666;
   min-height: 100vh;
   width: 20%;
@@ -16,16 +16,16 @@ sidebar {
   color: #cfccd6;
 }
 
-.background{
+.background {
   float: left;
   width: 80%;
-  min-height: 100%;     /* rohadjon meg amiert nem megy */
+  min-height: 100%; /* rohadjon meg amiert nem megy */
   /*background-color: #eeeeee;*/
   padding: 30px;
   overflow: hidden;
 }
 
-.content{
+.content {
   border-style: solid;
   border-color: #505050;
   border-width: 1px;
@@ -35,7 +35,7 @@ sidebar {
 
 }
 
-.wrapper{
+.wrapper {
   overflow: hidden;
   height: 100%;
 }

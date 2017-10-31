@@ -18,7 +18,7 @@
         <input matInput placeholder="Jelszó" type="password" [formControl]="passwordFormControl"
                [(ngModel)]="model.password"/>
         <mat-error *ngIf="passwordFormControl.hasError('required')">
-          Az jelszó mező <strong>kötelező!</strong>
+          A jelszó mező <strong>kötelező!</strong>
         </mat-error>
       </mat-form-field>
 

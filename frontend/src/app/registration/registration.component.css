@@ -12,7 +12,7 @@
   padding: 20px 0 20px 10px;
 }
 
-.example-form{
+.example-form {
   margin: 0 10px 0 10px;
 }
 
@@ -20,17 +20,27 @@
   width: 70%;
 }
 
-.left{
+.left {
   float: left;
   width: 50%;
   overflow: hidden;
 }
 
-.right{
+.right {
   width: 50%;
   overflow: hidden;
 }
 
-.wrapper{
+.wrapper {
   overflow: hidden;
 }
+
+.confirm {
+  margin: 10px 10px 10px 10px;
+}
+
+mat-checkbox {
+  margin-left: 20px;
+  padding-top: 40px;
+}
+

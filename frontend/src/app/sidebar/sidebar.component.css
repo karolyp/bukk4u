@@ -16,31 +16,32 @@
 }
 
 mat-slider {
-  width: 220px;
-  padding-left: 20px;
+  width: 90%;
 }
 
 /deep/ .mat-accent .mat-slider-track-fill {
-  background-color: #b8ffaa;
+  background-color: #a0ddff;
 }
 
 /deep/ .mat-accent .mat-slider-thumb {
-  background-color: #b8ffaa;
+  background-color: #a0ddff;
 }
 
 /deep/ .mat-accent .mat-slider-thumb-label {
-  background-color: #50b252;
+  background-color: #a0ddff;
 
 }
 
 .slider {
   text-align: center;
-  margin-left: 20px;
+  /*margin-left: 20px;*/
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .slidervalue {
   margin-top: 10px;
-  color: #b8ffaa;
+  color: #a0ddff;
   font-size: 20px;
 }
 
