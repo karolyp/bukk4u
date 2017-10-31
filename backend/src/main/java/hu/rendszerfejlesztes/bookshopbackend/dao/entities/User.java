@@ -19,6 +19,7 @@ public class User {
     private String email;
     private String password;
     private String address;
+    // TODO: telefonszám?
 
     @Enumerated(value = EnumType.STRING)
     private UserRole userRole;

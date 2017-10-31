@@ -17,12 +17,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public void saveUser(User user) {
+    public boolean saveUser(User user) {
+        if(userRepository.findOneByEmail(user.getEmail()) != null)
+            return false;
+
         if(!user.isPasswordEncrtyped()){
             user.setPassword(EncryptionUtils.getMD5HashString(user.getPassword()));
         }
 
         userRepository.save(user);
+        return true;
     }
 
     public List<User> getUsers() {
@@ -36,5 +40,9 @@ public class UserService {
         }).collect(Collectors.toList());
     }
 
-
+    public User getUser(String email, String password) {
+        //userRepository.findOne
+        String cryptedpass = EncryptionUtils.getMD5HashString(password);
+        return userRepository.findOneByEmailAndPassword(email, cryptedpass);
+    }
 }
