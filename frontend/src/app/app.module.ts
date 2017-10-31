@@ -19,7 +19,8 @@ import {HttpModule} from '@angular/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import 'hammerjs';
 import { RegistrationComponent } from './registration/registration.component';
-import { BooksComponent } from './books/books.component';
+import { BookListComponent } from './book-list/book-list.component';
+import { BookComponent } from './book-list/book/book.component';
 
 const appRoutes: Routes = [];
 
@@ -30,7 +31,8 @@ const appRoutes: Routes = [];
     LoginComponent,
     SidebarComponent,
     RegistrationComponent,
-    BooksComponent
+    BookComponent,
+    BookListComponent
   ],
   imports: [
     BrowserModule,
