@@ -27,6 +27,7 @@ public class BookController {
 
     /**
      * Visszatér a könyv-listával amiknek a nevében benne van a paraméter.
+     * HA a NÉV üres ("") akkor minden könyvet visszaad.
      * @return List<Book>
      */
     @RequestMapping(path = "/findbooks", method = RequestMethod.GET)
@@ -36,6 +37,22 @@ public class BookController {
         List<Book> booksWithNameContaining = bookService.getBooksByNameContaining(nev);
         if(!booksWithNameContaining.isEmpty()) {
             return ResponseEntity.ok(booksWithNameContaining);
+        } else {
+            return ResponseEntity.badRequest().body(null); // TODO: változtatni valamit rajta?
+        }
+    }
+
+    /**
+     * Visszatér a könyv-listával amik a kiválasztott kategóriába tartoznak.
+     * @return List<Book>
+     */
+    @RequestMapping(path = "/getbooksbygenre", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<Book>> getBooksByGenre(HttpServletRequest request){
+        String genre = request.getParameter("genre");
+        List<Book> books = bookService.getBooksByGenre(genre);
+        if(!books.isEmpty()) {
+            return ResponseEntity.ok(books);
         } else {
             return ResponseEntity.badRequest().body(null); // TODO: változtatni valamit rajta?
         }

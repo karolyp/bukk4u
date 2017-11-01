@@ -7,6 +7,7 @@ import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.BookRepository;
 import hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Category;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,12 @@ public class BookService {
     private BookRepository bookRepository;
 
     public List<Book>getBooksByNameContaining(String nev) {
-        return Lists.newArrayList(bookRepository.findByTitleContaining(nev));
+        if(nev == "")
+            return Lists.newArrayList(bookRepository.findAll());
+        else return Lists.newArrayList(bookRepository.findByTitleContaining(nev));
+    }
+
+    public List<Book>getBooksByGenre(String genre) {
+        return Lists.newArrayList(bookRepository.findByCategory(Category.valueOf(genre)));
     }
 }
