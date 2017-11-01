@@ -1,3 +1,31 @@
-<p>
-  book works!
-</p>
+<div class="wrapper" xmlns:https="http://www.w3.org/1999/xhtml">
+
+  <div class="image">
+    <img src="https://images-na.ssl-images-amazon.com/images/I/51LT2OYd6iL._SL200_.jpg">
+  </div>
+  <div class="title-details">
+    <div class="title">{{book.title}}</div>
+    <div class="author">{{book.author}}</div>
+    <div class="stars">     <!-- TODO: ertekeles alapjan -->
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star_border</mat-icon>
+    </div>
+    <div class="details">{{book.details}}</div>
+  </div>
+  <div class="order-details">
+    <div class="price">{{book.price}} Ft</div>
+    <div class="fav-cart">
+      <button mat-button><mat-icon>favorite</mat-icon></button>
+      <button mat-button>Kosárba <mat-icon>add_shopping_cart</mat-icon></button>
+
+    <div class="on-stock">{{book.onStock}}</div>  <!-- TODO: (book.onStock == true) ? "raktáron" : "nincs raktáron"
+  </div>
+
+  <!--<div class="thumbnail" style="max-width: 200px;" >-->
+  <!--<img src="https://images-na.ssl-images-amazon.com/images/I/51LT2OYd6iL._SL200_.jpg">-->
+  <!--</div>-->
+  <!--<div class="details" style="max-width: 500px;" ><p>{{book.title}}<br>{{book.author}}</p>{{book.details}}</div>-->
+</div>
