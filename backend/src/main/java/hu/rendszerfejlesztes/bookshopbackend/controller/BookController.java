@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -48,10 +49,19 @@ public class BookController {
      */
     @RequestMapping(path = "/getbooksbygenre", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<Book>> getBooksByGenre(HttpServletRequest request){
+    public ResponseEntity<List<Book>> getBooksByGenreAndPrice(HttpServletRequest request){
         String genre = request.getParameter("genre");
+        int maxPrice = Integer.parseInt(request.getParameter("maxprice"));
         List<Book> books = bookService.getBooksByGenre(genre);
         if(!books.isEmpty()) {
+            if(maxPrice > 0) {
+                for (Iterator<Book> iter = books.listIterator(); iter.hasNext(); ) {
+                    Book tmp = iter.next();
+                    if(tmp.getPrice() > maxPrice) {
+                        books.remove(iter);
+                    }
+                }
+            }
             return ResponseEntity.ok(books);
         } else {
             return ResponseEntity.badRequest().body(null); // TODO: változtatni valamit rajta?

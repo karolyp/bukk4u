@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
 
 @Controller
 @RequestMapping("/api")
@@ -55,5 +56,12 @@ public class UserController {
         } else {
             return ResponseEntity.badRequest().body(null); // TODO: szépíteni
         }
+    }
+
+    @RequestMapping(path = "/cart", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Book> getUserCart(HttpServletRequest request){
+        int userID = Integer.parseInt(request.getParameter("userid"));
+        return userService.getUserCart(userID);
     }
 }
