@@ -29,6 +29,9 @@ public class User {
     private Cart cart;
     @OneToMany(mappedBy="user")
     private Set<Ratings> ratings = new HashSet<Ratings>();
+    private String address;
+
+
 
     @Enumerated(value = EnumType.STRING)
     private UserRole userRole;
