@@ -1,94 +1,154 @@
 package hu.rendszerfejlesztes.bookshopbackend.dao.entities;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Book {
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	private Integer isbn;
+	private Long isbn;
+
 	private String title;
-	private String details;
-	private String category;
-	private String author;
-	private Integer price;
-	private boolean onStock;
-	private String publisher;
-	
-	public Book(){
-		
-	}
+	private String description;
+    private Integer price;
+    private Integer inStock;
+    private String publisher;
+    private String thumbnail;
 
-	public Integer getIsbn() {
-		return isbn;
-	}
+	@Column(name = "date")
+    private java.sql.Date releaseDate;
 
-	public void setIsbn(Integer isbn) {
-		this.isbn = isbn;
-	}
+	@OneToMany(mappedBy="book")
+	private Set<Author> authors = new HashSet<Author>();
 
-	public String getTitle() {
-		return title;
-	}
+    @OneToMany(mappedBy="bookRating")
+    private Set<Ratings> ratings = new HashSet<Ratings>();
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+	@Enumerated(value = EnumType.STRING)
+	private Category category;
 
-	public String getDetails() {
-		return details;
-	}
+	public Book(){	}
 
-	public void setDetails(String details) {
-		this.details = details;
-	}
+    public Book(Long isbn, String title, String description, Integer price, Integer inStock,
+                String publisher, String thumbnail, Date releaseDate, Set<Author> authors,
+                Set<Ratings> ratings, Category category) {
+        this.isbn = isbn;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.inStock = inStock;
+        this.publisher = publisher;
+        this.thumbnail = thumbnail;
+        this.releaseDate = releaseDate;
+        this.authors = authors;
+        this.ratings = ratings;
+        this.category = category;
+    }
 
-	public String getCategory() {
-		return category;
-	}
+    public String getThumbnail() {
+        return thumbnail;
+    }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public Set<Ratings> getRatings() {
+        return ratings;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setRatings(Set<Ratings> ratings) {
+        this.ratings = ratings;
+    }
 
-	public Integer getPrice() {
-		return price;
-	}
+    public Long getIsbn() {
+        return isbn;
+    }
 
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
+    public void setIsbn(Long isbn) {
+        this.isbn = isbn;
+    }
 
-	public boolean isOnStock() {
-		return onStock;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setOnStock(boolean onStock) {
-		this.onStock = onStock;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getPublisher() {
-		return publisher;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	@Override
-	public String toString() {
-		return "Book [isbn=" + isbn + ", title=" + title + ", details=" + details + ", category=" + category
-				+ ", author=" + author + ", price=" + price + ", onStock=" + onStock + ", publisher=" + publisher + "]";
-	}
-			
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getInStock() {
+        return inStock;
+    }
+
+    public void setInStock(Integer inStock) {
+        this.inStock = inStock;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "isbn=" + isbn +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", inStock=" + inStock +
+                ", publisher='" + publisher + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", releaseDate=" + releaseDate +
+                ", authors=" + authors +
+                ", ratings=" + ratings +
+                ", category=" + category +
+                '}';
+    }
 }
