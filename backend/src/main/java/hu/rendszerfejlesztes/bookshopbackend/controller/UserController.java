@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -42,4 +43,17 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @RequestMapping(path = "/user", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<User> getUser(HttpServletRequest request) {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        User u = userService.getUser(email, password);
+
+        if (u != null) {
+            return ResponseEntity.ok(u);
+        } else {
+            return ResponseEntity.badRequest().body(null); // TODO: szépíteni
+        }
+    }
 }

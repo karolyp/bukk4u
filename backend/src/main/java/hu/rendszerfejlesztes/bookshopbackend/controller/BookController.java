@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -28,10 +29,15 @@ public class BookController {
      * Visszatér a könyv-listával amiknek a nevében benne van a paraméter.
      * @return List<Book>
      */
-    @RequestMapping(path = "/findbooks", method = RequestMethod.POST)
+    @RequestMapping(path = "/findbooks", method = RequestMethod.GET)
     @ResponseBody
-    public List<Book> getBooksByNameContaining(@RequestBody String nev){
-        return bookService.getBooksByNameContaining(nev);
+    public ResponseEntity<List<Book>> getBooksByNameContaining(HttpServletRequest request){
+        String nev = request.getParameter("nev");
+        List<Book> booksWithNameContaining = bookService.getBooksByNameContaining(nev);
+        if(!booksWithNameContaining.isEmpty()) {
+            return ResponseEntity.ok(booksWithNameContaining);
+        } else {
+            return ResponseEntity.badRequest().body(null); // TODO: változtatni valamit rajta?
+        }
     }
-
 }
