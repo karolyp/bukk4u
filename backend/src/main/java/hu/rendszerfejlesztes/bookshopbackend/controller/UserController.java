@@ -21,12 +21,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // TODO: detect if user already exists
     @RequestMapping(path = "/user", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Response> saveUser(@RequestBody User user){
-        userService.saveUser(user);
-        return ResponseEntity.ok(Response.successWithMessage("User successfully registered."));
+        if(userService.saveUser(user))
+            return ResponseEntity.ok(Response.successWithMessage("Sikeres regisztráció!"));
+        else
+            return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!")); // TODO: Karesz validate this :D
     }
 
     @RequestMapping(path = "/usersWithoutPassword", method = RequestMethod.GET)
