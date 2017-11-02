@@ -1,0 +1,39 @@
+.loginTitle {
+  color: #36b6e5;
+  border-bottom: 2px solid;
+  font-size: 24px;
+  padding-left: 5px;
+}
+
+.loginForm {
+  padding-top: 10px;
+  min-width: 400px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+}
+
+.form-item {
+  width: 100%;
+  padding-top: 5px;
+}
+
+.button-line {
+  padding-bottom: 5px;
+}
+
+.bottom-form {
+  padding-top: 10px;
+  float: right;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.btn-line {
+  padding-bottom: 10px;
+}

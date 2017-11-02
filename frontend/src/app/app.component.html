@@ -1,14 +1,14 @@
-<mat-toolbar>
-  <span>Bukk4u</span>
-  <mat-toolbar-row>
-    <div class="menuButtons">
-      <button mat-raised-button color="warn"><span matTooltip="Ez haza visz!">Homepage(tooltip)</span></button>
-      <button mat-raised-button>Books</button>
-      <button mat-raised-button>My items</button>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
+<toolbar></toolbar>
+<div class="wrapper">
+  <sidebar></sidebar>
+  <div class="background">
+    <div class="content">
+      <router-outlet>
 
-<div style="align: center; background-color: #f8f8f8; padding: 10px; margin-top: 5px;">
-  kekekek
+        <book-list></book-list>
+
+      </router-outlet>
+    </div>
+  </div>
 </div>
+

@@ -1,0 +1,68 @@
+<div class="wrapper">
+  <div class="registrationTitle">
+    Regisztráció
+  </div>
+
+  <div class="left">
+
+    <div class="alTitle">
+      Személyes adatok
+    </div>
+
+    <form class="reg-form">
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Név"/>
+      </mat-form-field>
+      <mat-form-field class="form-item">
+        <input matInput placeholder="E-mail cím"/>
+      </mat-form-field>
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Telefonszám"/>
+      </mat-form-field>
+      <!--<input matInput [matDatepicker]="picker" placeholder="Válassz egy dátumot">-->
+      <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+      <!--<mat-datepicker #picker></mat-datepicker>-->
+    </form>
+
+    <div class="alTitle">
+      Számlázási adatok
+    </div>
+
+    <form class="reg-form">
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Város"/>
+      </mat-form-field>
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Irányítószám"/>
+      </mat-form-field>
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Utca, házszám"/>
+      </mat-form-field>
+    </form>
+
+  </div>
+  <div class="right">
+    <div class="alTitle">
+      Felhasználói adatok
+    </div>
+
+    <form class="reg-form">
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Jelszó"/>
+      </mat-form-field>
+      <mat-form-field class="form-item">
+        <input matInput placeholder="Jelszó mégegyszer"/>
+      </mat-form-field>
+
+    </form>
+    <div class="confirm">
+      <mat-checkbox color="primary">Az <a href="#">Általános szerződési feltételeket</a> és az <br> <a href="#">Adatvédelmi
+        és adatkezelési szabályzatot</a> <br> elolvastam és elfogadom.
+      </mat-checkbox>
+      <br>
+      <button mat-raised-button color="primary">Regisztrálok</button>
+    </div>
+  </div>
+
+</div>
+

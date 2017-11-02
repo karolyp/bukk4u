@@ -1,0 +1,21 @@
+<div class="base">
+  <div class="label">
+    Kategóriák
+  </div>
+  <div class="categories">
+    <div class="category" *ngFor="let category of categories">
+      <button mat-button>{{category}}</button>
+    </div>
+  </div>
+  <div class="label">
+    Maximum ár
+  </div>
+
+  <div class="slider">
+    <p class="slidervalue">{{matslider.value}} Ft</p>
+    <mat-slider [max]="maxPrice" [value]="value" [step]="steps" #matslider></mat-slider>
+
+  </div>
+  <div class="fill-remaining-space"></div>
+
+</div>

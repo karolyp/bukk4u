@@ -1,0 +1,31 @@
+<mat-toolbar style="padding-top: 10px">
+  <div class="logo">bukk4u</div>
+
+  <div class="fill-remaining-space"></div>
+
+  <div class="toolbar-item">
+
+    <mat-form-field class="search">
+      <i matPrefix class="material-icons md-36">search</i>
+      <input matInput placeholder="Könyv keresése"/>
+    </mat-form-field>
+  </div>
+  <div class="toolbar-item">
+    <button (click)="loginClicked($event)" mat-button>
+      <mat-icon>account_circle</mat-icon>
+      Belépés
+    </button>
+  </div>
+  <div class="toolbar-item">
+    <button (click)="cartClicked($event)" mat-button >
+      <mat-icon>shopping_cart</mat-icon>
+      {{cartBalance}} Ft
+    </button>
+  </div>
+  <div class="toolbar-item">
+    <button mat-button>
+      <mat-icon>assignment</mat-icon>
+      Rendelés állapota
+    </button>
+  </div>
+</mat-toolbar>
