@@ -1,9 +1,9 @@
-<button *ngIf="!user.email" (click)="userButtonClicked($event)" mat-button>
+<button *ngIf="!user.fullName" (click)="userButtonClicked($event)" mat-button>
   <mat-icon>account_circle</mat-icon>
   <span>Belépés</span>
 </button>
 
-<button *ngIf="user.email" mat-button [matMenuTriggerFor]="appMenu">
+<button *ngIf="user.fullName" mat-button [matMenuTriggerFor]="appMenu">
   <mat-icon>account_circle</mat-icon>
   <span>Hello {{user.fullName}}</span>
 </button>

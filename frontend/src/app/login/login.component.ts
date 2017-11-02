@@ -11,20 +11,17 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   user: User = new User();
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   constructor(public dialog: MatDialog) {
-  }
-
-  ngOnInit(): void {
     let savedUser = localStorage.getItem('currentUser');
     if (savedUser != null) {
       this.user = JSON.parse(savedUser);
     }
-
   }
+
 
   userButtonClicked($event): void {
     if (!this.user.email) {

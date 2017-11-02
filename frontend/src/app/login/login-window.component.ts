@@ -38,14 +38,13 @@ export class LoginWindowComponent {
 
   login($event): void {
     this.loading = true;
-    console.log(JSON.stringify(this.model));
 
     this.authenticationService.login(this.model).subscribe(
       res => {
         let user = res.json();
         this.loading = false;
         this.openSnackBar('Belépve mint '.concat(user.fullName), 'Close'); // TODO: külön kezelni ha nem található a felhasználó
-        this.data.email = user.fullName;
+        this.data.fullName = user.fullName;
         this.dialogRef.close();
         localStorage.setItem('currentUser',JSON.stringify(user));
       },
