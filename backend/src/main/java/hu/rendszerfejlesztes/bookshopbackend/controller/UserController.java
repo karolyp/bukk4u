@@ -23,7 +23,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(path = "/user", method = RequestMethod.POST) // PUT
+    @RequestMapping(path = "/user", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<Response> saveUser(@RequestBody User user){
         if(userService.saveUser(user))
@@ -38,18 +38,16 @@ public class UserController {
         return userService.getUsersWithoutPassword();
     }
 
-    @RequestMapping(path = "/users", method = RequestMethod.GET)
+    @RequestMapping(path = "/users", method = RequestMethod.POST)
     @ResponseBody
     public List<User> getUsers(){
         return userService.getUsers();
     }
 
-    @RequestMapping(path = "/user", method = RequestMethod.GET) // POST
+    @RequestMapping(path = "/user", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<User> getUser(HttpServletRequest request) {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User u = userService.getUser(email, password);
+    public ResponseEntity<User> getUser(@RequestBody User user) {
+        User u = userService.getUser(user.getEmail(), user.getPassword());
 
         if (u != null) {
             return ResponseEntity.ok(u);

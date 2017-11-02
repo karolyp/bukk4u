@@ -4,8 +4,8 @@ import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
-    User findOneByEmailAndPassword(String Email, String Password);
-    User findOneByEmail(String Email);
-    User findOneByID(Integer id);
+    User findOneByEmailAndPassword(String email, String password);
+
+    User findOneByEmail(String email);
 }
 

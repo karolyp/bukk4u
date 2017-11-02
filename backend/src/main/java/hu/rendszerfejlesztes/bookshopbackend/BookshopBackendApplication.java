@@ -13,6 +13,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import static hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils.getMD5HashString;
 
@@ -35,7 +38,27 @@ public class BookshopBackendApplication extends SpringBootServletInitializer {
     @Bean
     protected CommandLineRunner init(UserRepository userRepository) {
         return args -> {
-            userRepository.save(new User("Admin", "admin@bukk4u", EncryptionUtils.getMD5HashString("admin"), "noaddress", UserRole.ADMIN));
+            User u = new User();
+            u.setFullName("Admin");
+            u.setEmail("admin@bukk4u");
+            u.setPassword(EncryptionUtils.getMD5HashString("admin"));
+            u.setUserRole(UserRole.ADMIN);
+            userRepository.save(u);
+        };
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*")
+                        .allowedHeaders("Content-Type", "X-Requested-With", "Authorization")
+                        .allowedMethods("GET", "POST", "DELETE", "PUT", "OPTIONS").allowCredentials(true);
+            }
+
+
         };
     }
 

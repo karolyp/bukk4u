@@ -15,7 +15,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
+
 @Service
 public class UserService {
 
@@ -26,10 +28,10 @@ public class UserService {
     private CartRepository cartRepository;
 
     public boolean saveUser(User user) {
-        if(userRepository.findOneByEmail(user.getEmail()) != null)
+        if (userRepository.findOneByEmail(user.getEmail()) != null)
             return false;
 
-        if(!user.isPasswordEncrtyped()){
+        if (!user.isPasswordEncrtyped()) {
             user.setPassword(EncryptionUtils.getMD5HashString(user.getPassword()));
         }
 
@@ -54,12 +56,14 @@ public class UserService {
         return userRepository.findOneByEmailAndPassword(email, cryptedpass);
     }
 
-    public List<Book> getUserCart(int ID) {
-        User u = userRepository.findOneByID(ID);
+    public List<Book> getUserCart(int id) {
+        User u = userRepository.findOne(id);
         Set<CartElement> products = cartRepository.findOneByCustomer(u).getProducts();
 
         List<Book> cart = Lists.newArrayList();
-        products.forEach(tmp -> { cart.add(tmp.getBook()); });
+        products.forEach(tmp -> {
+            cart.add(tmp.getBook());
+        });
         return cart;
     }
 }
