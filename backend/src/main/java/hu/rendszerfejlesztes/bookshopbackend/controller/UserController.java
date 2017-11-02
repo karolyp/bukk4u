@@ -23,7 +23,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(path = "/user", method = RequestMethod.POST)
+    @RequestMapping(path = "/user", method = RequestMethod.POST) // PUT
     @ResponseBody
     public ResponseEntity<Response> saveUser(@RequestBody User user){
         if(userService.saveUser(user))
@@ -44,7 +44,7 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @RequestMapping(path = "/user", method = RequestMethod.GET)
+    @RequestMapping(path = "/user", method = RequestMethod.GET) // POST
     @ResponseBody
     public ResponseEntity<User> getUser(HttpServletRequest request) {
         String email = request.getParameter("email");
