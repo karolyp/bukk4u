@@ -4,23 +4,22 @@ public class Response {
 
     private boolean success;
     private String message;
+    private static Response response = new Response();
 
-    public Response(){
+    private Response(){
 
     }
 
     public static Response successWithMessage(String message) {
-        Response r = new Response();
-        r.success = true;
-        r.message = message;
-        return r;
+        response.success = true;
+        response.message = message;
+        return response;
     }
 
     public static Response failureWithMessage(String message) {
-        Response r = new Response();
-        r.success = false;
-        r.message = message;
-        return r;
+        response.success = false;
+        response.message = message;
+        return response;
     }
 
     public boolean isSuccess() {

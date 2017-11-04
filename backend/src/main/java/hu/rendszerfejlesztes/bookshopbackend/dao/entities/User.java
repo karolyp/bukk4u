@@ -7,6 +7,9 @@ import com.google.common.base.Objects;
 
 import javax.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -18,6 +21,17 @@ public class User {
     private String fullName;
     private String email;
     private String password;
+    private String city;
+    private String street;
+    private Integer postCode;
+    private Integer phoneNumber;
+
+    @OneToOne
+    private Cart cart;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Ratings> ratings = new HashSet<>();
+
     private String address;
 
     @Enumerated(value = EnumType.STRING)
@@ -29,12 +43,36 @@ public class User {
     public User() {
     }
 
-    public User(String fullName, String email, String password, String address, UserRole userRole) {
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.userRole = userRole;
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public Integer getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(Integer postCode) {
+        this.postCode = postCode;
+    }
+
+    public Integer getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Integer getId() {
@@ -69,14 +107,6 @@ public class User {
         this.password = password;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public UserRole getUserRole() {
         return userRole;
     }
@@ -102,7 +132,10 @@ public class User {
                 .add("fullName", fullName)
                 .add("email", email)
                 .add("password", password)
-                .add("address", address)
+                .add("city", city)
+                .add("street", street)
+                .add("postCode", postCode)
+                .add("phoneNumber", phoneNumber)
                 .add("userRole", userRole)
                 .toString();
     }

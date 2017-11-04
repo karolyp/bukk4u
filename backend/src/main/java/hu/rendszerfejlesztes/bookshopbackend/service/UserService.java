@@ -1,15 +1,22 @@
 package hu.rendszerfejlesztes.bookshopbackend.service;
 
 import com.google.common.collect.Lists;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Cart;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.CartElement;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
+import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.CartRepository;
 import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.UserRepository;
 import hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils;
 import org.hibernate.cache.internal.CollectionCacheInvalidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
 
 @Service
 public class UserService {
@@ -17,12 +24,19 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public void saveUser(User user) {
-        if(!user.isPasswordEncrtyped()){
+    @Autowired
+    private CartRepository cartRepository;
+
+    public boolean saveUser(User user) {
+        if (userRepository.findOneByEmail(user.getEmail()) != null)
+            return false;
+
+        if (!user.isPasswordEncrtyped()) {
             user.setPassword(EncryptionUtils.getMD5HashString(user.getPassword()));
         }
 
         userRepository.save(user);
+        return true;
     }
 
     public List<User> getUsers() {
@@ -36,5 +50,20 @@ public class UserService {
         }).collect(Collectors.toList());
     }
 
+    public User getUser(String email, String password) {
+        //userRepository.findOne
+        String cryptedpass = EncryptionUtils.getMD5HashString(password);
+        return userRepository.findOneByEmailAndPassword(email, cryptedpass);
+    }
 
+    public List<Book> getUserCart(int id) {
+        User u = userRepository.findOne(id);
+        Set<CartElement> products = cartRepository.findOneByCustomer(u).getProducts();
+
+        List<Book> cart = Lists.newArrayList();
+        products.forEach(tmp -> {
+            cart.add(tmp.getBook());
+        });
+        return cart;
+    }
 }

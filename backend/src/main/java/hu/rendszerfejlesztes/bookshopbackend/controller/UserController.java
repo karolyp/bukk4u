@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
 
 @Controller
 @RequestMapping("/api")
@@ -21,12 +23,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // TODO: detect if user already exists
-    @RequestMapping(path = "/user", method = RequestMethod.POST)
+    @RequestMapping(path = "/user", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<Response> saveUser(@RequestBody User user){
-        userService.saveUser(user);
-        return ResponseEntity.ok(Response.successWithMessage("User successfully registered."));
+        if(userService.saveUser(user))
+            return ResponseEntity.ok(Response.successWithMessage("Sikeres regisztráció!"));
+        else
+            return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!")); // TODO: Karesz validate this :D
     }
 
     @RequestMapping(path = "/usersWithoutPassword", method = RequestMethod.GET)
@@ -35,10 +38,28 @@ public class UserController {
         return userService.getUsersWithoutPassword();
     }
 
-    @RequestMapping(path = "/users", method = RequestMethod.GET)
+    @RequestMapping(path = "/users", method = RequestMethod.POST)
     @ResponseBody
     public List<User> getUsers(){
         return userService.getUsers();
     }
 
+    @RequestMapping(path = "/user", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<User> getUser(@RequestBody User user) {
+        User u = userService.getUser(user.getEmail(), user.getPassword());
+
+        if (u != null) {
+            return ResponseEntity.ok(u);
+        } else {
+            return ResponseEntity.badRequest().body(null); // TODO: szépíteni
+        }
+    }
+
+    @RequestMapping(path = "/cart", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Book> getUserCart(HttpServletRequest request){
+        int userID = Integer.parseInt(request.getParameter("userid"));
+        return userService.getUserCart(userID);
+    }
 }
