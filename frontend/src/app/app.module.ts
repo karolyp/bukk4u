@@ -21,6 +21,8 @@ import 'hammerjs';
 import { RegistrationComponent } from './registration/registration.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { BookComponent } from './book-list/book/book.component';
+import {LoginWindowComponent} from "./login/login-window.component";
+import {ProfileComponent} from "./login/profile/profile.component";
 
 const appRoutes: Routes = [];
 
@@ -32,7 +34,9 @@ const appRoutes: Routes = [];
     SidebarComponent,
     RegistrationComponent,
     BookComponent,
-    BookListComponent
+    BookListComponent,
+    LoginWindowComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,7 @@ const appRoutes: Routes = [];
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent]
+  entryComponents: [LoginWindowComponent]
 })
 export class AppModule {
 }

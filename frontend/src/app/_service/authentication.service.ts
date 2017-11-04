@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, URLSearchParams , RequestOptions} from '@angular/http';
+import {Http, Headers, Request, RequestOptions, RequestMethod} from '@angular/http';
 import {AppConstants} from '../app.constants';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../_model/user';
@@ -11,15 +11,18 @@ export class AuthenticationService {
   }
 
   login(user: User): Observable<any> {
-    let params: URLSearchParams = new URLSearchParams();
-    params.set('email', user.email);
-    params.set('password', user.password);
-
-    let requestOptions = new RequestOptions({
-      search : params
+    let headers = new Headers({
+      'Content-Type': 'application/json'
     });
 
-    return this.http.get(AppConstants.API + '/user', requestOptions);
+    let requestOptions = new RequestOptions({
+      method: RequestMethod.Post,
+      headers: headers,
+      url: AppConstants.API + '/user',
+      body: JSON.stringify(user)
+    })
+
+    return this.http.request(new Request(requestOptions));
 
   }
 }
