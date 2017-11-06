@@ -16,13 +16,14 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthenticationService} from './_service/authentication.service';
 import {HttpModule} from '@angular/http';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
 import 'hammerjs';
-import { RegistrationComponent } from './registration/registration.component';
-import { BookListComponent } from './book-list/book-list.component';
-import { BookComponent } from './book-list/book/book.component';
+import {RegistrationComponent} from './registration/registration.component';
+import {BookListComponent} from './book-list/book-list.component';
+import {BookComponent} from './book-list/book/book.component';
 import {LoginWindowComponent} from "./login/login-window.component";
 import {ProfileComponent} from "./login/profile/profile.component";
+import {CookieService} from 'angular2-cookie/services/cookies.service';
 
 const appRoutes: Routes = [];
 
@@ -61,7 +62,7 @@ const appRoutes: Routes = [];
     FormsModule,
     HttpModule
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, CookieService],
   bootstrap: [AppComponent],
   entryComponents: [LoginWindowComponent]
 })

@@ -25,4 +25,20 @@ export class AuthenticationService {
     return this.http.request(new Request(requestOptions));
 
   }
+
+  getUserByToken(token: string): Observable<any> {
+
+    let params = new URLSearchParams();
+    params.set('token', token);
+
+    let requestOptions = new RequestOptions({
+      method: RequestMethod.Post,
+      url: AppConstants.API + '/user-token',
+      search: params,
+      params: params
+    })
+
+    return this.http.post(AppConstants.API + '/user-token', requestOptions);
+  }
+
 }
