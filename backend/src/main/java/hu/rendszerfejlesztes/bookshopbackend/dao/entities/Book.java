@@ -24,7 +24,7 @@ public class Book {
 	private Set<Author> authors = new HashSet<Author>();
 
     @OneToMany(mappedBy="bookRating")
-    private Set<Ratings> ratings = new HashSet<Ratings>();
+    private Set<Rating> ratings = new HashSet<Rating>();
 
 	@Enumerated(value = EnumType.STRING)
 	private Category category;
@@ -33,7 +33,7 @@ public class Book {
 
     public Book(Long isbn, String title, String description, Integer price, Integer inStock,
                 String publisher, String thumbnail, Date releaseDate, Set<Author> authors,
-                Set<Ratings> ratings, Category category) {
+                Set<Rating> ratings, Category category) {
         this.isbn = isbn;
         this.title = title;
         this.description = description;
@@ -55,11 +55,11 @@ public class Book {
         this.thumbnail = thumbnail;
     }
 
-    public Set<Ratings> getRatings() {
+    public Set<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(Set<Ratings> ratings) {
+    public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
     }
 

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Ratings {
+public class Rating {
     @Id
     @GeneratedValue
     private Integer ratingsId;
@@ -18,9 +18,9 @@ public class Ratings {
     @ManyToOne
     private Book bookRating;
 
-    public Ratings() { }
+    public Rating() { }
 
-    public Ratings(Integer ratingsId, Integer score, boolean isFavorite, User user, Book bookRating) {
+    public Rating(Integer ratingsId, Integer score, boolean isFavorite, User user, Book bookRating) {
         this.ratingsId = ratingsId;
         this.score = score;
         this.isFavorite = isFavorite;

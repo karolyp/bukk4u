@@ -12,12 +12,13 @@ public class Author {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Integer authorId;
-    private String  authorName;
+    private String authorName;
 
-    @ManyToOne (cascade= CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Book book;
 
-    public Author() {}
+    public Author() {
+    }
 
     public Author(Integer authorId, String authorName, Book book) {
         this.authorId = authorId;

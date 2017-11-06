@@ -17,7 +17,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import static hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils.getMD5HashString;
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 @EnableJpaRepositories
@@ -36,14 +37,17 @@ public class BookshopBackendApplication extends SpringBootServletInitializer {
     }
 
     @Bean
-    protected CommandLineRunner init(UserRepository userRepository) {
+    CommandLineRunner runner(UserRepository userRepository) {
         return args -> {
             User u = new User();
-            u.setFullName("Admin");
-            u.setEmail("admin@bukk4u");
-            u.setPassword(EncryptionUtils.getMD5HashString("admin"));
             u.setUserRole(UserRole.ADMIN);
+            u.setPassword(EncryptionUtils.getMD5HashString("admin"));
+            u.setEmail("admin@bukk4u");
+            u.setFullName("Admin Feri");
             userRepository.save(u);
+
+            LOGGER.info("Admin token is: {}", u.getToken());
+
         };
     }
 

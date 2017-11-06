@@ -1,22 +1,18 @@
 package hu.rendszerfejlesztes.bookshopbackend.service;
 
 import com.google.common.collect.Lists;
-import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Cart;
-import hu.rendszerfejlesztes.bookshopbackend.dao.entities.CartElement;
-import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.*;
 import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.CartRepository;
 import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.UserRepository;
+import hu.rendszerfejlesztes.bookshopbackend.exception.BackendException;
 import hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils;
-import org.hibernate.cache.internal.CollectionCacheInvalidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
 
 @Service
 public class UserService {
@@ -50,14 +46,19 @@ public class UserService {
         }).collect(Collectors.toList());
     }
 
-    public User getUser(String email, String password) {
-        //userRepository.findOne
-        String cryptedpass = EncryptionUtils.getMD5HashString(password);
-        return userRepository.findOneByEmailAndPassword(email, cryptedpass);
+
+    public User login(User u) throws BackendException {
+        String encryptedPass = EncryptionUtils.getMD5HashString(u.getPassword());
+        User user = userRepository.findOneByEmailAndPassword(u.getEmail(), encryptedPass);
+        if (user != null) {
+            return user;
+        } else {
+            throw new BackendException("Could not find user!");
+        }
     }
 
-    public List<Book> getUserCart(int id) {
-        User u = userRepository.findOne(id);
+    public List<Book> getUserCart(String email) {
+        User u = userRepository.findOneByEmail(email);
         Set<CartElement> products = cartRepository.findOneByCustomer(u).getProducts();
 
         List<Book> cart = Lists.newArrayList();
@@ -66,4 +67,10 @@ public class UserService {
         });
         return cart;
     }
+
+    public User findOneByToken(String token){
+        return userRepository.findOneByToken(token);
+    }
+
 }
+
