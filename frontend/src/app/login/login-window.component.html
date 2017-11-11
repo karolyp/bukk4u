@@ -1,44 +1,108 @@
-<div>
-  <div class="loginTitle">
-    Bejelentkezés
+<mat-tab-group>
+  <mat-tab label="Bejelentkezés">
+    <div>
+    <div>
+      <form class="loginForm center">
+        <mat-form-field class="form-item">
+          <input matInput placeholder="E-mail cím" [formControl]="emailFormControl" [(ngModel)]="model.email"/>
+          <mat-error *ngIf="emailFormControl.hasError('pattern')">
+            Valós e-mail címet adj meg!
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Az e-mail mező <strong>kötelező!</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Jelszó" type="password" [formControl]="passwordFormControl"
+                 [(ngModel)]="model.password"/>
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            A jelszó mező <strong>kötelező!</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="bottom-form">
+          <div align="right" class="btn-line">
+            <button mat-raised-button class="pointer" color="primary">Elfelejtett jelszó</button>
+            <button mat-raised-button class="pointer" color="primary" (click)="login($event)"
+                    [disabled]="emailFormControl.hasError('required') || emailFormControl.hasError('pattern') || passwordFormControl.hasError('required')">
+              Belépés
+            </button>
+          </div>
+          <div align="right" class="btn-line">
+            Nincs még fiókod?
+            <button mat-raised-button class="pointer" style="margin-left: 8px" color="primary">Regisztráció</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div *ngIf="loading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
   </div>
-  <div>
-    <form class="loginForm center">
-      <mat-form-field class="form-item">
-        <input matInput placeholder="E-mail cím" [formControl]="emailFormControl" [(ngModel)]="model.email"/>
-        <mat-error *ngIf="emailFormControl.hasError('pattern')">
-          Valós e-mail címet adj meg!
-        </mat-error>
-        <mat-error *ngIf="emailFormControl.hasError('required')">
-          Az e-mail mező <strong>kötelező!</strong>
-        </mat-error>
-      </mat-form-field>
+  </mat-tab>
+  <mat-tab label="Regisztráció">
+    <div class="left">
 
-      <mat-form-field class="form-item">
-        <input matInput placeholder="Jelszó" type="password" [formControl]="passwordFormControl"
-               [(ngModel)]="model.password"/>
-        <mat-error *ngIf="passwordFormControl.hasError('required')">
-          A jelszó mező <strong>kötelező!</strong>
-        </mat-error>
-      </mat-form-field>
-
-      <div class="bottom-form">
-        <div align="right" class="btn-line">
-          <button mat-raised-button class="pointer" color="primary">Elfelejtett jelszó</button>
-          <button mat-raised-button class="pointer" color="primary" (click)="login($event)"
-                  [disabled]="emailFormControl.hasError('required') || emailFormControl.hasError('pattern') || passwordFormControl.hasError('required')">
-            Belépés
-          </button>
-        </div>
-        <div align="right" class="btn-line">
-          Nincs még fiókod?
-          <button mat-raised-button class="pointer" style="margin-left: 8px" color="primary">Regisztráció</button>
-        </div>
+      <div class="alTitle">
+        Személyes adatok
       </div>
 
-    </form>
-  </div>
-  <div *ngIf="loading">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  </div>
-</div>
+      <form class="reg-form">
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Név"/>
+        </mat-form-field>
+        <mat-form-field class="form-item">
+          <input matInput placeholder="E-mail cím"/>
+        </mat-form-field>
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Telefonszám"/>
+        </mat-form-field>
+        <!--<input matInput [matDatepicker]="picker" placeholder="Válassz egy dátumot">-->
+        <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+        <!--<mat-datepicker #picker></mat-datepicker>-->
+      </form>
+
+      <div class="alTitle">
+        Számlázási adatok
+      </div>
+
+      <form class="reg-form">
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Város"/>
+        </mat-form-field>
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Irányítószám"/>
+        </mat-form-field>
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Utca, házszám"/>
+        </mat-form-field>
+      </form>
+
+    </div>
+    <div class="right">
+      <div class="alTitle">
+        Felhasználói adatok
+      </div>
+
+      <form class="reg-form">
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Jelszó"/>
+        </mat-form-field>
+        <mat-form-field class="form-item">
+          <input matInput placeholder="Jelszó mégegyszer"/>
+        </mat-form-field>
+
+      </form>
+      <div class="confirm">
+        <mat-checkbox color="primary">Az <a href="#">Általános szerződési<br> feltételeket</a> és az <br><a href="#">Adatvédelmi
+          és adatkezelési szabályzatot</a> <br> elolvastam és elfogadom.
+        </mat-checkbox>
+        <br>
+        <button mat-raised-button color="primary">Regisztrálok</button>
+      </div>
+    </div>
+  </mat-tab>
+
+</mat-tab-group>

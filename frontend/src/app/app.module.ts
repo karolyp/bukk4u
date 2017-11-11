@@ -4,9 +4,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatCheckboxModule, MatMenuModule, MatIconModule, MatButtonModule, MatFormFieldModule,
   MatInputModule, MatToolbarModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule, MatSidenavModule,
-  MatSliderModule, MatDatepickerModule
+  MatSliderModule, MatDatepickerModule, MatTabsModule
 } from '@angular/material';
-
 
 import {NgbModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent} from './app.component';
@@ -24,6 +23,7 @@ import {BookComponent} from './book-list/book/book.component';
 import {LoginWindowComponent} from "./login/login-window.component";
 import {ProfileComponent} from "./login/profile/profile.component";
 import {CookieService} from 'angular2-cookie/services/cookies.service';
+import {RegistrationWindowComponent} from './login/registration-window.component';
 
 const appRoutes: Routes = [];
 
@@ -37,7 +37,8 @@ const appRoutes: Routes = [];
     BookComponent,
     BookListComponent,
     LoginWindowComponent,
-    ProfileComponent
+    ProfileComponent,
+    RegistrationWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +56,7 @@ const appRoutes: Routes = [];
     MatIconModule,
     MatSliderModule,
     MatDatepickerModule,
+    MatTabsModule,
     NgbModule.forRoot(),
     NgbAlertModule.forRoot(),
     RouterModule.forRoot(appRoutes),
@@ -64,7 +66,7 @@ const appRoutes: Routes = [];
   ],
   providers: [AuthenticationService, CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [LoginWindowComponent]
+  entryComponents: [LoginWindowComponent, RegistrationWindowComponent]
 })
 export class AppModule {
 }

@@ -62,4 +62,8 @@ export class LoginWindowComponent {
 
   }
 
+  resize($event){
+    this.dialogRef.updateSize('700px', '700px').updatePosition();
+  }
+
 }
