@@ -17,13 +17,12 @@ import {AuthenticationService} from './_service/authentication.service';
 import {HttpModule} from '@angular/http';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import 'hammerjs';
-import {RegistrationComponent} from './registration/registration.component';
+import {RegisterComponent} from './register/register.component';
 import {BookListComponent} from './book-list/book-list.component';
 import {BookComponent} from './book-list/book/book.component';
 import {LoginWindowComponent} from "./login/login-window.component";
 import {ProfileComponent} from "./login/profile/profile.component";
 import {CookieService} from 'angular2-cookie/services/cookies.service';
-import {RegistrationWindowComponent} from './login/registration-window.component';
 
 const appRoutes: Routes = [];
 
@@ -33,12 +32,11 @@ const appRoutes: Routes = [];
     ToolbarComponent,
     LoginComponent,
     SidebarComponent,
-    RegistrationComponent,
+    RegisterComponent,
     BookComponent,
     BookListComponent,
     LoginWindowComponent,
-    ProfileComponent,
-    RegistrationWindowComponent
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +64,7 @@ const appRoutes: Routes = [];
   ],
   providers: [AuthenticationService, CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [LoginWindowComponent, RegistrationWindowComponent]
+  entryComponents: [LoginWindowComponent]
 })
 export class AppModule {
 }

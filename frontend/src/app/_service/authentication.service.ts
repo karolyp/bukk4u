@@ -20,7 +20,7 @@ export class AuthenticationService {
       headers: headers,
       url: AppConstants.API + '/user',
       body: JSON.stringify(user)
-    })
+    });
 
     return this.http.request(new Request(requestOptions));
 
