@@ -30,10 +30,17 @@
   padding-top: 10px;
   float: right;
 }
+
 .pointer {
   cursor: pointer;
 }
 
 .btn-line {
   padding-bottom: 10px;
+}
+
+.logout {
+  font-size: 24px;
+  margin-right: 16px;
+  color: rgba(0, 0, 0, .54);
 }

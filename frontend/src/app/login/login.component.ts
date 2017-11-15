@@ -1,8 +1,10 @@
-import {Component} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {Component, ViewChild, OnInit} from '@angular/core';
+
+import {MatDialog, MatMenuTrigger} from "@angular/material";
+import {LoginWindowComponent} from "./login-window.component";
 import {User} from "../_model/user";
+import {CookieService} from "angular2-cookie/core";
 import {AuthenticationService} from "../_service/authentication.service";
-import {MatSnackBar} from "@angular/material";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -11,48 +13,37 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  user: User = new User();
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  constructor(private authenticationService: AuthenticationService, public snackBar: MatSnackBar) {
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
-
-  model: User = new User();
-  loading = false;
-
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern(EMAIL_REGEX)]);
-
-  passwordFormControl = new FormControl('', [
-    Validators.required
-  ]);
-
-  login($event): void {
-    this.loading = true;
-    console.log(JSON.stringify(this.model));
-    localStorage.setItem('email','test@test');
-    console.log('"Logged in"');
-    
-    this.authenticationService.login(this.model).subscribe(
-      res => {
-        console.log(res.json());
-        let user = res.json();
-        this.loading = false;
-        this.openSnackBar('Belépve mint '.concat(user.fullName), 'Close'); // TODO: külön kezelni ha nem található a felhasználó
-        localStorage.setItem('email', 'test@test.test');
-      },
-      error => {
-        this.openSnackBar('Hiba a bejelentkezés során!', 'Close');
-        this.loading = false;
-      }
-    );
+  constructor(public dialog: MatDialog,
+              private _cookieService: CookieService,
+              private _authService: AuthenticationService) {
 
   }
+
+  ngOnInit() {
+    let savedUserToken = this._cookieService.get('token');
+    if (savedUserToken != null) {
+      this._authService.getUserByToken('f4c6d2596cd74479e77b65ea7941234801f4fbe4113d5ff52b607c88eba9b20d').subscribe(res => {
+        console.log(res);
+      });
+    }
+  }
+
+
+  userButtonClicked($event): void {
+    if (!this.user.email) {
+      let dialogRef = this.dialog.open(LoginWindowComponent, {
+        height: '670px',
+        width: '600px',
+        data: this.user
+      });
+    } else {
+      this.trigger.openMenu();
+    }
+  }
+
 
 }

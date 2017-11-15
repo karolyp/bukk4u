@@ -1,0 +1,8 @@
+<table class="table">
+  <tr *ngFor="let book of books">
+    <td>{{book.isbn}}</td>
+    <td>{{book.title}}</td>
+    <td><a routerLink="/admin/books-edit/{{book.isbn}}">Szerkesztés</a></td>
+    <td><button (click)="delete(book)">Törlés</button></td>
+  </tr>
+</table>

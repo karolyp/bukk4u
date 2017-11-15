@@ -2,23 +2,26 @@ package hu.rendszerfejlesztes.bookshopbackend.dao.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
+import hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils;
 
 import javax.persistence.*;
-
-import static javax.persistence.GenerationType.IDENTITY;
+import java.io.Serializable;
+import java.util.*;
 
 @Entity
-public class User {
+public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String fullName;
     private String email;
     private String password;
+    private String city;
+    private String street;
+    private String postCode;
+    private String phoneNumber;
     private String address;
+    private String token = EncryptionUtils.getSHA256HashString(UUID.randomUUID().toString());
 
     @Enumerated(value = EnumType.STRING)
     private UserRole userRole;
@@ -26,15 +29,13 @@ public class User {
     @Transient
     private boolean passwordEncrtyped;
 
-    public User() {
-    }
+    @OneToOne
+    private Cart cart;
 
-    public User(String fullName, String email, String password, String address, UserRole userRole) {
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.userRole = userRole;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Rating> ratings;
+
+    public User() {
     }
 
     public Integer getId() {
@@ -43,6 +44,38 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getFullName() {
@@ -61,20 +94,14 @@ public class User {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public UserRole getUserRole() {
@@ -95,15 +122,61 @@ public class User {
         this.passwordEncrtyped = passwordEncrtyped;
     }
 
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("fullName", fullName)
-                .add("email", email)
-                .add("password", password)
-                .add("address", address)
-                .add("userRole", userRole)
-                .toString();
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append(", fullName='").append(fullName).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", city='").append(city).append('\'');
+        sb.append(", street='").append(street).append('\'');
+        sb.append(", postCode=").append(postCode);
+        sb.append(", phoneNumber=").append(phoneNumber);
+        sb.append(", address='").append(address).append('\'');
+        sb.append(", userRole=").append(userRole);
+        sb.append(", passwordEncrtyped=").append(passwordEncrtyped);
+        sb.append(", cart=").append(cart);
+        sb.append(", ratings=").append(ratings);
+        sb.append(", token=").append(token);
+        sb.append('}');
+        return sb.toString();
     }
+
+    @Transient
+    @JsonIgnore
+    public byte[] getBytes() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.toString());
+        sb.append(Long.toString(new Date().getTime()));
+        return sb.toString().getBytes();
+    }
+
 }

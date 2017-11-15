@@ -1,0 +1,43 @@
+.reg-form {
+  padding-top: 10px;
+  min-width: 400px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+}
+
+.form-item {
+  width: 100%;
+}
+
+.left {
+  float: left;
+  width: 50%;
+  overflow: hidden;
+}
+
+.right {
+  width: 50%;
+  overflow: hidden;
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+.confirm {
+  margin: 10px 10px 10px 10px;
+}
+
+mat-checkbox {
+  margin-left: 20px;
+  padding-top: 40px;
+}
+
+.bottom-button{
+  margin-right: 13%;
+}
