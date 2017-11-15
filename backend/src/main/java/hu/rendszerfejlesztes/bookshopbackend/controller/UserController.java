@@ -1,11 +1,13 @@
 package hu.rendszerfejlesztes.bookshopbackend.controller;
 
+import com.fasterxml.jackson.databind.node.TextNode;
 import hu.rendszerfejlesztes.bookshopbackend.controller.beans.Response;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
 import hu.rendszerfejlesztes.bookshopbackend.exception.BackendException;
 import hu.rendszerfejlesztes.bookshopbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
+class NewUserFields {
+    public String email;
+    public String password;
+    public String getEmail() { return email; }
+    public String getPassword() { return password; }
+}
+
 @Controller
 @RequestMapping("/api")
 public class UserController {
@@ -24,15 +33,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(path = "/user", method = RequestMethod.PUT)
+    @RequestMapping(path = "/user", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Response> saveUser(@RequestBody NewUserFields newUser) {
+        if (userService.saveUser(newUser.getEmail(), newUser.getPassword())) {
+            return ResponseEntity.ok(Response.successWithMessage("Sikeres regisztráció!"));
+        } else {
+            return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!"));
+        }
+    }
+    /*@RequestMapping(path = "/user", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<Response> saveUser(@RequestBody User user) {
         if (userService.saveUser(user)) {
             return ResponseEntity.ok(Response.successWithMessage("Sikeres regisztráció!"));
         } else {
-            return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!")); // TODO: Karesz validate this :D
+            return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!"));
         }
-    }
+    }*/
 
     @RequestMapping(path = "/usersWithoutPassword", method = RequestMethod.GET)
     @ResponseBody
