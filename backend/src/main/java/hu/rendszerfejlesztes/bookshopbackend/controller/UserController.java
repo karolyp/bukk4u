@@ -19,12 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
-class NewUserFields {
+/*class NewUserFields {
     public String email;
     public String password;
     public String getEmail() { return email; }
     public String getPassword() { return password; }
-}
+}*/
 
 @Controller
 @RequestMapping("/api")
@@ -33,7 +33,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(path = "/user", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    /*@RequestMapping(path = "/user", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Response> saveUser(@RequestBody NewUserFields newUser) {
         if (userService.saveUser(newUser.getEmail(), newUser.getPassword())) {
@@ -41,16 +41,17 @@ public class UserController {
         } else {
             return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!"));
         }
-    }
-    /*@RequestMapping(path = "/user", method = RequestMethod.PUT)
+    }*/
+
+    @RequestMapping(path = "/user", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity<Response> saveUser(@RequestBody User user) {
+    public ResponseEntity<Response> saveUser(@RequestBody User user) { // ez így a tokent kliensoldalról fogja kapni!!
         if (userService.saveUser(user)) {
             return ResponseEntity.ok(Response.successWithMessage("Sikeres regisztráció!"));
         } else {
             return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!"));
         }
-    }*/
+    }
 
     @RequestMapping(path = "/usersWithoutPassword", method = RequestMethod.GET)
     @ResponseBody

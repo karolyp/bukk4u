@@ -21,7 +21,7 @@ public class User implements Serializable {
     private String postCode;
     private String phoneNumber;
     private String address;
-    private String token = EncryptionUtils.getSHA256HashString(UUID.randomUUID().toString());
+    private String token;
 
     @Enumerated(value = EnumType.STRING)
     private UserRole userRole;
@@ -36,6 +36,11 @@ public class User implements Serializable {
     private Set<Rating> ratings;
 
     public User() {
+    }
+    public void randomizeTokenOnce() {
+        if(token == null) {
+            token = EncryptionUtils.getSHA256HashString(UUID.randomUUID().toString());
+        }
     }
 
     public Integer getId() {

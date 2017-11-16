@@ -24,7 +24,7 @@ public class UserService {
     @Autowired
     private CartRepository cartRepository;
 
-    public boolean saveUser(String email, String jelszo) {
+    /*public boolean saveUser(String email, String jelszo) {
         if (userRepository.findOneByEmail(email) != null)
             return false;
 
@@ -37,18 +37,18 @@ public class UserService {
 
         userRepository.save(user);
         return true;
-    }
-    /*public boolean saveUser(User user) { // 2017.11.15 előtti verzsön
+    }*/
+    public boolean saveUser(User user) { // 2017.11.15 előtti verzsön
         if (userRepository.findOneByEmail(user.getEmail()) != null)
             return false;
 
         if (!user.isPasswordEncrtyped()) {
             user.setPassword(EncryptionUtils.getMD5HashString(user.getPassword()));
         }
-
+        user.randomizeTokenOnce();
         userRepository.save(user);
         return true;
-    }*/
+    }
 
     public List<User> getUsers() {
         return Lists.newArrayList(userRepository.findAll());
@@ -60,7 +60,6 @@ public class UserService {
             return u;
         }).collect(Collectors.toList());
     }
-
     public User login(User u) throws BackendException {
         String encryptedPass = EncryptionUtils.getMD5HashString(u.getPassword());
         User user = userRepository.findOneByEmailAndPassword(u.getEmail(), encryptedPass);
@@ -70,16 +69,6 @@ public class UserService {
             throw new BackendException("Could not find user!");
         }
     }
-
-    /*public User login(User u) throws BackendException { // // 2017.11.15 előtti verzsön
-        String encryptedPass = EncryptionUtils.getMD5HashString(u.getPassword());
-        User user = userRepository.findOneByEmailAndPassword(u.getEmail(), encryptedPass);
-        if (user != null) {
-            return user;
-        } else {
-            throw new BackendException("Could not find user!");
-        }
-    }*/
 
     public List<Book> getUserCart(String email) {
         User u = userRepository.findOneByEmail(email);
