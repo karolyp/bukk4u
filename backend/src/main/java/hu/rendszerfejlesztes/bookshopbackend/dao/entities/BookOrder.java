@@ -1,15 +1,13 @@
 package hu.rendszerfejlesztes.bookshopbackend.dao.entities;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Order {
+public class BookOrder implements Serializable {
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	private Integer orderId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String email;
 	private Integer cartTotal;
 	private Integer total;
@@ -27,11 +25,11 @@ public class Order {
 	@OneToOne
 	private Cart cart;
 
-	public Order(){}
+	public BookOrder(){}
 
-	public Order(Integer orderId, String email, Integer cartTotal, Integer total, Integer deliveryPrice,
+	public BookOrder(Integer orderId, String email, Integer cartTotal, Integer total, Integer deliveryPrice,
 				 DeliveryMethod deliveryMethod, PaymentMethod paymentMethod, OrderStatus status, Cart cart) {
-		this.orderId = orderId;
+		this.id = orderId;
 		this.email = email;
 		this.cartTotal = cartTotal;
 		this.total = total;
@@ -43,11 +41,11 @@ public class Order {
 	}
 
 	public Integer getOrderId() {
-		return orderId;
+		return id;
 	}
 
 	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
+		this.id = orderId;
 	}
 
 	public String getEmail() {
@@ -116,8 +114,8 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order{" +
-				"orderId=" + orderId +
+		return "BookOrder{" +
+				"orderId=" + id +
 				", email='" + email + '\'' +
 				", cartTotal=" + cartTotal +
 				", total=" + total +

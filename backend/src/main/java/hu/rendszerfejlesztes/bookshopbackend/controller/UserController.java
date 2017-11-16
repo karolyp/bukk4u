@@ -19,11 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
-/*class NewUserFields {
-    public String email;
-    public String password;
+/*class CartQueryFields {
+    private String email;
+    private String token;
     public String getEmail() { return email; }
-    public String getPassword() { return password; }
+    public String getToken() { return token; }
 }*/
 
 @Controller
@@ -32,16 +32,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    /*@RequestMapping(path = "/user", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<Response> saveUser(@RequestBody NewUserFields newUser) {
-        if (userService.saveUser(newUser.getEmail(), newUser.getPassword())) {
-            return ResponseEntity.ok(Response.successWithMessage("Sikeres regisztráció!"));
-        } else {
-            return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!"));
-        }
-    }*/
 
     @RequestMapping(path = "/user", method = RequestMethod.PUT)
     @ResponseBody
@@ -81,8 +71,9 @@ public class UserController {
     @RequestMapping(path = "/cart", method = RequestMethod.GET)
     @ResponseBody
     public List<Book> getUserCart(HttpServletRequest request) {
-        String email = request.getParameter("email");
-        return userService.getUserCart(email);
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        String token = request.getParameter("token");
+        return userService.getUserCart(id, token);
     }
 
     @RequestMapping(path = "/user-token", method = RequestMethod.POST)

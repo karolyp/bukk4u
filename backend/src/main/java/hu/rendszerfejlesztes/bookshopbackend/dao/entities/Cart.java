@@ -20,14 +20,14 @@ public class Cart {
     private Set<CartElement> products = new HashSet<CartElement>();
 
     @OneToOne
-    private Order order;
+    private BookOrder order;
 
     @OneToOne
     private User customer;
 
     public Cart(){}
 
-    public Cart(Integer cartID, Integer amount, Set<CartElement> products, Order order, User customer) {
+    public Cart(Integer cartID, Integer amount, Set<CartElement> products, BookOrder order, User customer) {
         this.cartID = cartID;
         this.amount = amount;
         this.products = products;
@@ -59,11 +59,11 @@ public class Cart {
         this.products = products;
     }
 
-    public Order getOrder() {
+    public BookOrder getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(BookOrder order) {
         this.order = order;
     }
 

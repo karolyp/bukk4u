@@ -12,15 +12,19 @@ import java.util.*;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID")
     private Integer id;
     private String fullName;
+    @Column(name="Email")
     private String email;
+    @Column(name="Password")
     private String password;
     private String city;
     private String street;
     private String postCode;
     private String phoneNumber;
     private String address;
+    @Column(name="Token")
     private String token;
 
     @Enumerated(value = EnumType.STRING)
@@ -30,17 +34,13 @@ public class User implements Serializable {
     private boolean passwordEncrtyped;
 
     @OneToOne
+    @JsonIgnore
     private Cart cart;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Rating> ratings;
 
     public User() {
-    }
-    public void randomizeTokenOnce() {
-        if(token == null) {
-            token = EncryptionUtils.getSHA256HashString(UUID.randomUUID().toString());
-        }
     }
 
     public Integer getId() {
@@ -183,5 +183,10 @@ public class User implements Serializable {
         sb.append(Long.toString(new Date().getTime()));
         return sb.toString().getBytes();
     }
-
+    @JsonIgnore
+    public void randomizeTokenOnce() {
+        if(token == null) {
+            token = EncryptionUtils.getSHA256HashString(UUID.randomUUID().toString());
+        }
+    }
 }
