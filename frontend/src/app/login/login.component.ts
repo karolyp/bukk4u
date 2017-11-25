@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   userButtonClicked($event): void {
     if (!this.user.email) {
       let dialogRef = this.dialog.open(LoginWindowComponent, {
-        height: '400px',
+        height: '670px',
         width: '600px',
         data: this.user
       });
