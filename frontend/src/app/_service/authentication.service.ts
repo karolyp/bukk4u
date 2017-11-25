@@ -13,7 +13,7 @@ export class AuthenticationService {
   login(user: User): Observable<any> {
     let headers = new Headers({
       'Content-Type': 'application/json'
-    });
+    })
 
     let requestOptions = new RequestOptions({
       method: RequestMethod.Post,
@@ -23,7 +23,6 @@ export class AuthenticationService {
     });
 
     return this.http.request(new Request(requestOptions));
-
   }
 
   getUserByToken(token: string): Observable<any> {

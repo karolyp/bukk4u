@@ -22,9 +22,9 @@ import {BookListComponent} from './book-list/book-list.component';
 import {BookComponent} from './book-list/book/book.component';
 import {LoginWindowComponent} from "./login/login-window.component";
 import {ProfileComponent} from "./login/profile/profile.component";
-import {CookieService} from 'angular2-cookie/services/cookies.service';
 
 const appRoutes: Routes = [];
+
 
 @NgModule({
   declarations: [
@@ -62,7 +62,8 @@ const appRoutes: Routes = [];
     FormsModule,
     HttpModule
   ],
-  providers: [AuthenticationService, CookieService],
+  providers: [AuthenticationService],
+
   bootstrap: [AppComponent],
   entryComponents: [LoginWindowComponent]
 })
