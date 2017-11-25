@@ -1,11 +1,13 @@
 package hu.rendszerfejlesztes.bookshopbackend.controller;
 
+import com.fasterxml.jackson.databind.node.TextNode;
 import hu.rendszerfejlesztes.bookshopbackend.controller.beans.Response;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
 import hu.rendszerfejlesztes.bookshopbackend.exception.BackendException;
 import hu.rendszerfejlesztes.bookshopbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
+/*class CartQueryFields {
+    private String email;
+    private String token;
+    public String getEmail() { return email; }
+    public String getToken() { return token; }
+}*/
+
 @Controller
 @RequestMapping("/api")
 public class UserController {
@@ -26,11 +35,11 @@ public class UserController {
 
     @RequestMapping(path = "/user", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity<Response> saveUser(@RequestBody User user) {
+    public ResponseEntity<Response> saveUser(@RequestBody User user) { // ez így a tokent kliensoldalról fogja kapni!!
         if (userService.saveUser(user)) {
             return ResponseEntity.ok(Response.successWithMessage("Sikeres regisztráció!"));
         } else {
-            return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!")); // TODO: Karesz validate this :D
+            return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!"));
         }
     }
 
@@ -62,8 +71,9 @@ public class UserController {
     @RequestMapping(path = "/cart", method = RequestMethod.GET)
     @ResponseBody
     public List<Book> getUserCart(HttpServletRequest request) {
-        String email = request.getParameter("email");
-        return userService.getUserCart(email);
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        String token = request.getParameter("token");
+        return userService.getUserCart(id, token);
     }
 
     @RequestMapping(path = "/user-token", method = RequestMethod.POST)

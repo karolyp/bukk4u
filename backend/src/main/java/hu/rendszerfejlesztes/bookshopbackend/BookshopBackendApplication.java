@@ -44,8 +44,9 @@ public class BookshopBackendApplication extends SpringBootServletInitializer {
             u.setPassword(EncryptionUtils.getMD5HashString("admin"));
             u.setEmail("admin@bukk4u");
             u.setFullName("Admin Feri");
-            userRepository.save(u);
+            u.randomizeTokenOnce();
 
+            userRepository.save(u);
             LOGGER.info("Admin token is: {}", u.getToken());
 
         };

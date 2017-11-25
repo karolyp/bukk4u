@@ -1,9 +1,11 @@
 package hu.rendszerfejlesztes.bookshopbackend.service;
 
 import com.google.common.collect.Lists;
+import com.sun.media.jfxmedia.logging.Logger;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.*;
 import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.CartRepository;
 import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.UserRepository;
+import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.BookOrderRepository;
 import hu.rendszerfejlesztes.bookshopbackend.exception.BackendException;
 import hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +31,20 @@ public class UserService {
 
         if (!user.isPasswordEncrtyped()) {
             user.setPassword(EncryptionUtils.getMD5HashString(user.getPassword()));
+            user.setPasswordEncrtyped(true);
         }
+        user.randomizeTokenOnce();
 
-        userRepository.save(user);
+        user = userRepository.save(user);
+        Cart userCart = new Cart();
+        userCart.setCustomer(user);
+
+        user.setCart(userCart);
+        Cart tmp = cartRepository.save(userCart);
+
+       /* Order newOrder = new Order();
+        newOrder.setCart(tmp);
+        orderRepository.save(newOrder);*/
         return true;
     }
 
@@ -45,8 +58,6 @@ public class UserService {
             return u;
         }).collect(Collectors.toList());
     }
-
-
     public User login(User u) throws BackendException {
         String encryptedPass = EncryptionUtils.getMD5HashString(u.getPassword());
         User user = userRepository.findOneByEmailAndPassword(u.getEmail(), encryptedPass);
@@ -57,8 +68,14 @@ public class UserService {
         }
     }
 
-    public List<Book> getUserCart(String email) {
-        User u = userRepository.findOneByEmail(email);
+    public List<Book> getUserCart(Integer id, String token) { // TODO: make it return how many of each book is in the cart
+        User u = userRepository.findOne(id);
+        if(u == null)
+            return null;
+
+        if(!u.getToken().equals(token))
+            return null;
+
         Set<CartElement> products = cartRepository.findOneByCustomer(u).getProducts();
 
         List<Book> cart = Lists.newArrayList();
