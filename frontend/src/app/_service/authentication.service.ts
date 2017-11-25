@@ -13,17 +13,16 @@ export class AuthenticationService {
   login(user: User): Observable<any> {
     let headers = new Headers({
       'Content-Type': 'application/json'
-    });
+    })
 
     let requestOptions = new RequestOptions({
       method: RequestMethod.Post,
       headers: headers,
       url: AppConstants.API + '/user',
       body: JSON.stringify(user)
-    })
+    });
 
     return this.http.request(new Request(requestOptions));
-
   }
 
   getUserByToken(token: string): Observable<any> {

@@ -4,9 +4,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatCheckboxModule, MatMenuModule, MatIconModule, MatButtonModule, MatFormFieldModule,
   MatInputModule, MatToolbarModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule, MatSidenavModule,
-  MatSliderModule, MatDatepickerModule
+  MatSliderModule, MatDatepickerModule, MatTabsModule
 } from '@angular/material';
-
 
 import {NgbModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent} from './app.component';
@@ -18,14 +17,14 @@ import {AuthenticationService} from './_service/authentication.service';
 import {HttpModule} from '@angular/http';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import 'hammerjs';
-import {RegistrationComponent} from './registration/registration.component';
+import {RegisterComponent} from './register/register.component';
 import {BookListComponent} from './book-list/book-list.component';
 import {BookComponent} from './book-list/book/book.component';
 import {LoginWindowComponent} from "./login/login-window.component";
 import {ProfileComponent} from "./login/profile/profile.component";
-import {CookieService} from 'angular2-cookie/services/cookies.service';
 
 const appRoutes: Routes = [];
+
 
 @NgModule({
   declarations: [
@@ -33,7 +32,7 @@ const appRoutes: Routes = [];
     ToolbarComponent,
     LoginComponent,
     SidebarComponent,
-    RegistrationComponent,
+    RegisterComponent,
     BookComponent,
     BookListComponent,
     LoginWindowComponent,
@@ -55,6 +54,7 @@ const appRoutes: Routes = [];
     MatIconModule,
     MatSliderModule,
     MatDatepickerModule,
+    MatTabsModule,
     NgbModule.forRoot(),
     NgbAlertModule.forRoot(),
     RouterModule.forRoot(appRoutes),
@@ -62,7 +62,8 @@ const appRoutes: Routes = [];
     FormsModule,
     HttpModule
   ],
-  providers: [AuthenticationService, CookieService],
+  providers: [AuthenticationService],
+
   bootstrap: [AppComponent],
   entryComponents: [LoginWindowComponent]
 })
