@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {CookieOptions, CookieOptionsArgs, CookieService} from "angular2-cookie/core";
 
 @Component({
   selector: 'app-root',
