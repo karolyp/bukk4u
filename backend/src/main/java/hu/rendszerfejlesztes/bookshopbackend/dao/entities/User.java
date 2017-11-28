@@ -24,7 +24,6 @@ public class User implements Serializable {
     private String street;
     private String postCode;
     private String phoneNumber;
-    private String address;
     @Column(name="Token")
     private String token;
 
@@ -144,14 +143,6 @@ public class User implements Serializable {
         this.ratings = ratings;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getToken() {
         return token;
     }
@@ -166,7 +157,6 @@ public class User implements Serializable {
         sb.append(", street='").append(street).append('\'');
         sb.append(", postCode=").append(postCode);
         sb.append(", phoneNumber=").append(phoneNumber);
-        sb.append(", address='").append(address).append('\'');
         sb.append(", userRole=").append(userRole);
         sb.append(", passwordEncrtyped=").append(passwordEncrtyped);
         sb.append(", cart=").append(cart);

@@ -4,7 +4,7 @@ export class User {
   public fullName: string;
   public phone: string;
   public city: string;
-  public zipCode: number;
+  public postCode: number;
   public street: string;
   public id: number;
   public token: string;
