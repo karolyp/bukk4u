@@ -39,5 +39,4 @@ export class AuthenticationService {
 
     return this.http.post(AppConstants.API + '/user-token', requestOptions);
   }
-
 }

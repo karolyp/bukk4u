@@ -12,7 +12,7 @@ export class RegistrationService {
 
 
   register(user: User): Observable<any> {
-      return this.http.post(AppConstants.API + '/user', user, this.jwt()).map((response: Response) => response.json());
+      return this.http.put(AppConstants.API + '/user', user, this.jwt()).map((response: Response) => response.json());
   }
 
   private jwt() {

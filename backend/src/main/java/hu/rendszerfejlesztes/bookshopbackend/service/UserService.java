@@ -64,7 +64,7 @@ public class UserService {
         if (user != null) {
             return user;
         } else {
-            throw new BackendException("Could not find user!");
+            throw new BackendException("Felhasználó nem található");
         }
     }
 

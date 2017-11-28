@@ -33,13 +33,13 @@
         <execution>
           <id>angular-cli build</id>
           <configuration>
-            <workingDirectory>.</workingDirectory>
+            <workingDirectory>./src/</workingDirectory>
             <executable>ng.cmd</executable>
             <arguments>
               <argument>build</argument>
               <argument>--prod</argument>
               <argument>--base-href</argument>
-              <argument>"/frontend/"</argument>
+              <argument>"/frontend/src/"</argument>
             </arguments>
           </configuration>
           <phase>generate-resources</phase>

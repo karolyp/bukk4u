@@ -48,7 +48,6 @@ public class BookshopBackendApplication extends SpringBootServletInitializer {
 
             userRepository.save(u);
             LOGGER.info("Admin token is: {}", u.getToken());
-
         };
     }
 
