@@ -1,9 +1,5 @@
 package hu.rendszerfejlesztes.bookshopbackend.dao.entities;
 
-/**
- * Created by Ákos on 2017.10.31..
- */
-
 public enum Category {
     DRAMA("DRAMA"),
     AKCIO("AKCIO"),
