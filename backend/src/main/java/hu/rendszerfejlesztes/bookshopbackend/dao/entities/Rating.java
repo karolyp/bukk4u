@@ -14,17 +14,17 @@ public class Rating {
     private boolean isFavorite = false;
 
     @ManyToOne
-    private User user;
+    private Customer customer;
     @ManyToOne
     private Book bookRating;
 
     public Rating() { }
 
-    public Rating(Integer ratingsId, Integer score, boolean isFavorite, User user, Book bookRating) {
+    public Rating(Integer ratingsId, Integer score, boolean isFavorite, Customer customer, Book bookRating) {
         this.ratingsId = ratingsId;
         this.score = score;
         this.isFavorite = isFavorite;
-        this.user = user;
+        this.customer = customer;
         this.bookRating = bookRating;
     }
 
@@ -52,12 +52,12 @@ public class Rating {
         isFavorite = favorite;
     }
 
-    public User getUser() {
-        return user;
+    public Customer getUser() {
+        return customer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Customer customer) {
+        this.customer = customer;
     }
 
     public Book getBook() {
@@ -74,7 +74,7 @@ public class Rating {
                 "ratingsId=" + ratingsId +
                 ", score=" + score +
                 ", isFavorite=" + isFavorite +
-                ", user=" + user +
+                ", customer=" + customer +
                 ", bookRating=" + bookRating +
                 '}';
     }

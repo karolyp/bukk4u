@@ -1,17 +1,17 @@
 package hu.rendszerfejlesztes.bookshopbackend.dao.repositories;
 
-import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Customer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
-    User findOne(Integer id);
+public interface UserRepository extends CrudRepository<Customer, Integer> {
+    Customer findOne(Integer id);
 
-    User findOneByEmailAndPassword(String email, String password);
+    Customer findOneByEmailAndPassword(String email, String password);
 
-    User findOneByEmail(String email);
+    Customer findOneByEmail(String email);
 
-    User findOneByToken(String token);
+    Customer findOneByToken(String token);
 }
 

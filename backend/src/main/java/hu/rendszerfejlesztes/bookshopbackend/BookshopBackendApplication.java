@@ -1,6 +1,6 @@
 package hu.rendszerfejlesztes.bookshopbackend;
 
-import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Customer;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.UserRole;
 import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.UserRepository;
 import hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils;
@@ -16,9 +16,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 @EnableJpaRepositories
@@ -39,7 +36,7 @@ public class BookshopBackendApplication extends SpringBootServletInitializer {
     @Bean
     CommandLineRunner runner(UserRepository userRepository) {
         return args -> {
-            User u = new User();
+            Customer u = new Customer();
             u.setUserRole(UserRole.ADMIN);
             u.setPassword(EncryptionUtils.getMD5HashString("admin"));
             u.setEmail("admin@bukk4u");

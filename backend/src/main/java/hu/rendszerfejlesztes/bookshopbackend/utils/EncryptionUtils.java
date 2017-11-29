@@ -1,12 +1,8 @@
 package hu.rendszerfejlesztes.bookshopbackend.utils;
 
 import com.google.common.base.Charsets;
-import com.google.common.hash.Funnel;
 import com.google.common.hash.Hashing;
-import com.google.common.hash.PrimitiveSink;
-import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
-
-import java.security.MessageDigest;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Customer;
 
 public class EncryptionUtils {
 
@@ -14,7 +10,7 @@ public class EncryptionUtils {
         return Hashing.md5().hashString(plainText, Charsets.UTF_8).toString();
     }
 
-    public static final String getSHA256HashString(User u) {
+    public static final String getSHA256HashString(Customer u) {
         return getSHA256HashString(u.getBytes());
     }
 

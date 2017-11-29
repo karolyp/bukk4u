@@ -23,11 +23,11 @@ public class Cart {
     private BookOrder order;
 
     @OneToOne
-    private User customer;
+    private Customer customer;
 
     public Cart(){}
 
-    public Cart(Integer cartID, Integer amount, Set<CartElement> products, BookOrder order, User customer) {
+    public Cart(Integer cartID, Integer amount, Set<CartElement> products, BookOrder order, Customer customer) {
         this.cartID = cartID;
         this.amount = amount;
         this.products = products;
@@ -67,11 +67,11 @@ public class Cart {
         this.order = order;
     }
 
-    public User getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(User customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 

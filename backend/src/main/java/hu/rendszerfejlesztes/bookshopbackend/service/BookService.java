@@ -2,15 +2,12 @@ package hu.rendszerfejlesztes.bookshopbackend.service;
 
 import com.google.common.collect.Lists;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
-import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
 import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.BookRepository;
-import hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Category;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BookService {

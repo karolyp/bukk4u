@@ -1,13 +1,11 @@
 package hu.rendszerfejlesztes.bookshopbackend.controller;
 
-import com.fasterxml.jackson.databind.node.TextNode;
 import hu.rendszerfejlesztes.bookshopbackend.controller.beans.Response;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
-import hu.rendszerfejlesztes.bookshopbackend.dao.entities.User;
+import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Customer;
 import hu.rendszerfejlesztes.bookshopbackend.exception.BackendException;
 import hu.rendszerfejlesztes.bookshopbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,13 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
-/*class CartQueryFields {
-    private String email;
-    private String token;
-    public String getEmail() { return email; }
-    public String getToken() { return token; }
-}*/
-
 @Controller
 @RequestMapping("/api")
 public class UserController {
@@ -35,7 +26,7 @@ public class UserController {
 
     @RequestMapping(path = "/user", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity<Response> saveUser(@RequestBody User user) { // ez így a tokent kliensoldalról fogja kapni!!
+    public ResponseEntity<Response> saveUser(@RequestBody Customer user) { // ez így a tokent kliensoldalról fogja kapni!!
         if (userService.saveUser(user)) {
             return ResponseEntity.ok(Response.successWithMessage("Sikeres regisztráció!"));
         } else {
@@ -45,20 +36,20 @@ public class UserController {
 
     @RequestMapping(path = "/usersWithoutPassword", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> getUsersWithoutPassword() {
+    public List<Customer> getUsersWithoutPassword() {
         return userService.getUsersWithoutPassword();
     }
 
     @RequestMapping(path = "/users", method = RequestMethod.POST)
     @ResponseBody
-    public List<User> getUsers() {
+    public List<Customer> getUsers() {
         return userService.getUsers();
     }
 
     @RequestMapping(path = "/user", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<User> getUser(@RequestBody User user) {
-        User u = null;
+    public ResponseEntity<Customer> getUser(@RequestBody Customer user) {
+        Customer u = null;
         try {
             u = userService.login(user);
             return ResponseEntity.ok(u);
@@ -77,7 +68,7 @@ public class UserController {
     }
 
     @RequestMapping(path = "/user-token", method = RequestMethod.POST)
-    public ResponseEntity<User> getUserForToken(HttpServletRequest request) {
+    public ResponseEntity<Customer> getUserForToken(HttpServletRequest request) {
         request.getParameterMap()
                 .entrySet()
                 .stream()

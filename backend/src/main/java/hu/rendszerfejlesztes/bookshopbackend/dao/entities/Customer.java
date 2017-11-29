@@ -10,7 +10,7 @@ import java.util.*;
 
 @Entity
 //@Table(name = "users")
-public class User implements Serializable {
+public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID")
@@ -37,10 +37,10 @@ public class User implements Serializable {
     @JsonIgnore
     private Cart cart;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="customer", fetch = FetchType.EAGER)
     private Set<Rating> ratings;
 
-    public User() {
+    public Customer() {
     }
 
     public Integer getId() {
@@ -149,7 +149,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("User{");
+        final StringBuilder sb = new StringBuilder("Customer{");
         sb.append(", fullName='").append(fullName).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append(", password='").append(password).append('\'');
