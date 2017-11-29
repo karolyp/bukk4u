@@ -7,9 +7,9 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class BookComponent implements OnInit {
 
- @Input() book: {isbn: number, title: string, details: string,
-    category: string, author: string, price: number,
-    publisher: string, onStock: boolean};
+ @Input() book: {isbn: number, title: string, description: string,
+    category: string, authors: string[], price: number,
+    publisher: string, inStock: number, thumbnail: string, releaseDate: string};
 
   constructor() { }
 

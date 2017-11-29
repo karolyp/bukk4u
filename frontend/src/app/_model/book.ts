@@ -1,25 +1,35 @@
 export class Book{
   public isbn: number;
   public title: string;
-  public details: string;
+  public description: string;
   public category: string;
-  public author: string;
+  public authors: string[];
   public price: number;
   public publisher: string;
-  public onStock: boolean;
+  public inStock: number;
+  public thumbnail: string;
+  public releaseDate: string;
+
+  //
+  // @Input() book: {isbn: string, title: string, description: string,
+  //   category: string, authors: string[], price: number,
+  //   publisher: string, inStock: number, thumbnail: string};
 
 
-  constructor(isbn: number, title: string, details: string,
-              category: string, author: string, price: number,
-              publisher: string, onStock: boolean) {
+  constructor(isbn: number, title: string, description: string,
+              category: string, author: string[], price: number,
+              publisher: string, inStock: number, thumbnail: string,
+              releaseDate: string) {
     this.isbn = isbn;
     this.title = title;
-    this.details = details;
+    this.description = description;
     this.category = category;
-    this.author = author;
+    this.authors = author;
     this.price = price;
     this.publisher = publisher;
-    this.onStock = onStock;
+    this.inStock = inStock;
+    this.thumbnail = thumbnail;
+    this.releaseDate = releaseDate;
   }
 }
 

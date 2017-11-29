@@ -1,19 +1,23 @@
 <div class="wrapper" xmlns:https="http://www.w3.org/1999/xhtml">
 
   <div class="image">
-    <img src="https://images-na.ssl-images-amazon.com/images/I/51LT2OYd6iL._SL200_.jpg">
+    <img src="{{book.thumbnail}}" style="width:140px;height:200px;">
   </div>
   <div class="title-details">
     <div class="title">{{book.title}}</div>
-    <div class="author">{{book.author}}</div>
-    <div class="stars">     <!-- TODO: ertekeles alapjan -->
+    <div class="author">{{book.authors[1]}}</div>
+    <div class="stars">
       <mat-icon>star</mat-icon>
       <mat-icon>star</mat-icon>
       <mat-icon>star</mat-icon>
       <mat-icon>star</mat-icon>
       <mat-icon>star_border</mat-icon>
     </div>
-    <div class="details">{{book.details}}</div>
+    <div class="details">
+      <b>Kiadó:</b> {{book.publisher}}<br>
+     <b> Kiadás dátuma:</b> {{book.releaseDate}} <br>
+      <b> Leírás:</b> {{book.description}}
+    </div>
   </div>
   <div class="order-details">
     <div class="price">{{book.price}} Ft</div>
@@ -21,11 +25,12 @@
       <button mat-button><mat-icon>favorite</mat-icon></button>
       <button mat-button>Kosárba <mat-icon>add_shopping_cart</mat-icon></button>
 
-    <div class="on-stock">{{book.onStock}}</div>  <!-- TODO: (book.onStock == true) ? "raktáron" : "nincs raktáron"
+    <div class="on-stock">Raktáron {{book.inStock}} db</div>
   </div>
 
   <!--<div class="thumbnail" style="max-width: 200px;" >-->
   <!--<img src="https://images-na.ssl-images-amazon.com/images/I/51LT2OYd6iL._SL200_.jpg">-->
   <!--</div>-->
-  <!--<div class="details" style="max-width: 500px;" ><p>{{book.title}}<br>{{book.author}}</p>{{book.details}}</div>-->
+  <!--<div class="description" style="max-width: 500px;" ><p>{{book.title}}<br>{{book.author}}</p>{{book.description}}</div>-->
+</div>
 </div>

@@ -1,2 +1,24 @@
-<button class="btn btn-primary" (click)="getBooks()">LISTBOOKS!</button>
-<book *ngFor="let book of books" [book]="book"></book>
+<button class="btn btn-primary" (click)="getBooks('GYEREKEKNEK')">GYEREKEKNEK</button>
+<button class="btn btn-primary" (click)="getBooks('AKCIO')">AKCIÓ</button>
+<button class="btn btn-primary" (click)="getBooks('KALAND')">KALAND</button>
+
+
+  <button class="btn btn-primary" (click)="getBooks('DRAMA')">Dráma</button>
+  <button class="btn btn-primary" (click)="getBooks('AKCIO')">Akció</button>
+  <button class="btn btn-primary" (click)="getBooks('KALAND')">Kaland</button>
+  <button class="btn btn-primary" (click)="getBooks('ROMANTIKUS')">Romantikus</button>
+
+
+  <button class="btn btn-primary" (click)="getBooks('HORROR')">Horror</button>
+  <button class="btn btn-primary" (click)="getBooks('UTAZAS')">Utazás</button>
+  <button class="btn btn-primary" (click)="getBooks('GYEREKEKNEK')">Gyerekeknek</button>
+  <button class="btn btn-primary" (click)="getBooks('MUVESZET')">Művészet</button>
+  <button class="btn btn-primary" (click)="getBooks('FOZES')">Főzés</button>
+  <button class="btn btn-primary" (click)="getBooks('ENCIKLOPEDIA')">Enciklopédia</button>
+  <button class="btn btn-primary" (click)="getBooks('KOMEDIA')">Komédia</button>
+  <button class="btn btn-primary" (click)="getBooks('SCIFI')">Sci-fi</button>
+<br>
+<hr>
+
+
+<book *ngFor="let book of dbBooks" [book]="book"></book>
