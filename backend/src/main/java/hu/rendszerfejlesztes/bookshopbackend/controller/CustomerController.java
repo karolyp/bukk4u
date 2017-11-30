@@ -4,7 +4,7 @@ import hu.rendszerfejlesztes.bookshopbackend.controller.beans.Response;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Customer;
 import hu.rendszerfejlesztes.bookshopbackend.exception.BackendException;
-import hu.rendszerfejlesztes.bookshopbackend.service.UserService;
+import hu.rendszerfejlesztes.bookshopbackend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,15 +19,15 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api")
-public class UserController {
+public class CustomerController {
 
     @Autowired
-    private UserService userService;
+    private CustomerService customerService;
 
     @RequestMapping(path = "/user", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<Response> saveUser(@RequestBody Customer user) { // ez így a tokent kliensoldalról fogja kapni!!
-        if (userService.saveUser(user)) {
+        if (customerService.saveUser(user)) {
             return ResponseEntity.ok(Response.successWithMessage("Sikeres regisztráció!"));
         } else {
             return ResponseEntity.ok(Response.failureWithMessage("Ez az e-mail cím már foglalt!"));
@@ -37,13 +37,13 @@ public class UserController {
     @RequestMapping(path = "/usersWithoutPassword", method = RequestMethod.GET)
     @ResponseBody
     public List<Customer> getUsersWithoutPassword() {
-        return userService.getUsersWithoutPassword();
+        return customerService.getUsersWithoutPassword();
     }
 
     @RequestMapping(path = "/users", method = RequestMethod.POST)
     @ResponseBody
     public List<Customer> getUsers() {
-        return userService.getUsers();
+        return customerService.getUsers();
     }
 
     @RequestMapping(path = "/user", method = RequestMethod.POST)
@@ -51,7 +51,7 @@ public class UserController {
     public ResponseEntity<Customer> getUser(@RequestBody Customer user) {
         Customer u = null;
         try {
-            u = userService.login(user);
+            u = customerService.login(user);
             return ResponseEntity.ok(u);
 
         } catch (BackendException e) {
@@ -64,7 +64,7 @@ public class UserController {
     public List<Book> getUserCart(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("id"));
         String token = request.getParameter("token");
-        return userService.getUserCart(id, token);
+        return customerService.getUserCart(id, token);
     }
 
     @RequestMapping(path = "/user-token", method = RequestMethod.POST)
@@ -79,7 +79,7 @@ public class UserController {
                             .forEach(f -> System.out.println("\t" + f));
                 });
         System.out.println(request.getParameter("token"));
-        return ResponseEntity.ok(userService.findOneByToken(request.getParameter("token")));
+        return ResponseEntity.ok(customerService.findOneByToken(request.getParameter("token")));
     }
 
 }

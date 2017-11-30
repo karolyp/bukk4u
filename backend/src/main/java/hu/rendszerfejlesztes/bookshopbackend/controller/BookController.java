@@ -1,7 +1,7 @@
 package hu.rendszerfejlesztes.bookshopbackend.controller;
 
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Book;
-import hu.rendszerfejlesztes.bookshopbackend.service.UserService;
+import hu.rendszerfejlesztes.bookshopbackend.service.CustomerService;
 import hu.rendszerfejlesztes.bookshopbackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    private UserService userService; // lehet nem fontos ide de még benthagytam
+    private CustomerService customerService; // lehet nem fontos ide de még benthagytam
     @Autowired
     private BookService bookService;
 
