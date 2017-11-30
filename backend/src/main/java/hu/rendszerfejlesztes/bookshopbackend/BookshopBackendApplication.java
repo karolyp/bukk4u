@@ -2,7 +2,7 @@ package hu.rendszerfejlesztes.bookshopbackend;
 
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.Customer;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.UserRole;
-import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.UserRepository;
+import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.CustomerRepository;
 import hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class BookshopBackendApplication extends SpringBootServletInitializer {
     }
 
     @Bean
-    CommandLineRunner runner(UserRepository userRepository) {
+    CommandLineRunner runner(CustomerRepository customerRepository) {
         return args -> {
             Customer u = new Customer();
             u.setUserRole(UserRole.ADMIN);
@@ -43,7 +43,7 @@ public class BookshopBackendApplication extends SpringBootServletInitializer {
             u.setFullName("Admin Feri");
             u.randomizeTokenOnce();
 
-            userRepository.save(u);
+            customerRepository.save(u);
             LOGGER.info("Admin token is: {}", u.getToken());
         };
     }

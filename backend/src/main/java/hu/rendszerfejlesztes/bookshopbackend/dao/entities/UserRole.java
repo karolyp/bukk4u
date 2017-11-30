@@ -1,7 +1,5 @@
 package hu.rendszerfejlesztes.bookshopbackend.dao.entities;
 
-import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.UserRepository;
-
 public enum UserRole {
     GUEST("GUEST"),
     USER("USER"),

@@ -3,7 +3,7 @@ package hu.rendszerfejlesztes.bookshopbackend.service;
 import com.google.common.collect.Lists;
 import hu.rendszerfejlesztes.bookshopbackend.dao.entities.*;
 import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.CartRepository;
-import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.UserRepository;
+import hu.rendszerfejlesztes.bookshopbackend.dao.repositories.CustomerRepository;
 import hu.rendszerfejlesztes.bookshopbackend.exception.BackendException;
 import hu.rendszerfejlesztes.bookshopbackend.utils.EncryptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
     private CartRepository cartRepository;
 
     public boolean saveUser(Customer user) {
-        if (userRepository.findOneByEmail(user.getEmail()) != null)
+        if (customerRepository.findOneByEmail(user.getEmail()) != null)
             return false;
 
         if (!user.isPasswordEncrtyped()) {
@@ -32,7 +32,7 @@ public class UserService {
         }
         user.randomizeTokenOnce();
 
-        user = userRepository.save(user);
+        user = customerRepository.save(user);
         Cart userCart = new Cart();
         userCart.setCustomer(user);
 
@@ -46,7 +46,7 @@ public class UserService {
     }
 
     public List<Customer> getUsers() {
-        return Lists.newArrayList(userRepository.findAll());
+        return Lists.newArrayList(customerRepository.findAll());
     }
 
     public List<Customer> getUsersWithoutPassword() {
@@ -57,7 +57,7 @@ public class UserService {
     }
     public Customer login(Customer u) throws BackendException {
         String encryptedPass = EncryptionUtils.getMD5HashString(u.getPassword());
-        Customer user = userRepository.findOneByEmailAndPassword(u.getEmail(), encryptedPass);
+        Customer user = customerRepository.findOneByEmailAndPassword(u.getEmail(), encryptedPass);
         if (user != null) {
             return user;
         } else {
@@ -66,7 +66,7 @@ public class UserService {
     }
 
     public List<Book> getUserCart(Integer id, String token) { // TODO: make it return how many of each book is in the cart
-        Customer u = userRepository.findOne(id);
+        Customer u = customerRepository.findOne(id);
         if(u == null)
             return null;
 
@@ -83,7 +83,7 @@ public class UserService {
     }
 
     public Customer findOneByToken(String token){
-        return userRepository.findOneByToken(token);
+        return customerRepository.findOneByToken(token);
     }
 
 }
