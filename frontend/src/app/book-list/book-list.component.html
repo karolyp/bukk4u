@@ -1,24 +1,26 @@
-<button class="btn btn-primary" (click)="getBooks('GYEREKEKNEK')">GYEREKEKNEK</button>
-<button class="btn btn-primary" (click)="getBooks('AKCIO')">AKCIÓ</button>
-<button class="btn btn-primary" (click)="getBooks('KALAND')">KALAND</button>
+<button class="btn btn-primary" (click)="getBooks2('GYEREKEKNEK', matslider.value)">GYEREKEKNEK</button>
+<button class="btn btn-primary" (click)="getBooks2('AKCIO', matslider.value)">AKCIÓ</button>
+<button class="btn btn-primary" (click)="getBooks2('KALAND', matslider.value)">KALAND</button>
 
 
-  <button class="btn btn-primary" (click)="getBooks('DRAMA')">Dráma</button>
-  <button class="btn btn-primary" (click)="getBooks('AKCIO')">Akció</button>
-  <button class="btn btn-primary" (click)="getBooks('KALAND')">Kaland</button>
-  <button class="btn btn-primary" (click)="getBooks('ROMANTIKUS')">Romantikus</button>
+  <button class="btn btn-primary" (click)="getBooks2('DRAMA', matslider.value)">Dráma</button>
+  <button class="btn btn-primary" (click)="getBooks2('AKCIO', matslider.value)">Akció</button>
+  <button class="btn btn-primary" (click)="getBooks2('KALAND', matslider.value)">Kaland</button>
+  <button class="btn btn-primary" (click)="getBooks2('ROMANTIKUS', matslider.value)">Romantikus</button>
 
 
-  <button class="btn btn-primary" (click)="getBooks('HORROR')">Horror</button>
-  <button class="btn btn-primary" (click)="getBooks('UTAZAS')">Utazás</button>
-  <button class="btn btn-primary" (click)="getBooks('GYEREKEKNEK')">Gyerekeknek</button>
-  <button class="btn btn-primary" (click)="getBooks('MUVESZET')">Művészet</button>
-  <button class="btn btn-primary" (click)="getBooks('FOZES')">Főzés</button>
-  <button class="btn btn-primary" (click)="getBooks('ENCIKLOPEDIA')">Enciklopédia</button>
-  <button class="btn btn-primary" (click)="getBooks('KOMEDIA')">Komédia</button>
-  <button class="btn btn-primary" (click)="getBooks('SCIFI')">Sci-fi</button>
-<br>
+  <button class="btn btn-primary" (click)="getBooks2('HORROR', matslider.value)">Horror</button>
+  <button class="btn btn-primary" (click)="getBooks2('UTAZAS', matslider.value)">Utazás</button>
+  <button class="btn btn-primary" (click)="getBooks2('GYEREKEKNEK', matslider.value)">Gyerekeknek</button>
+  <button class="btn btn-primary" (click)="getBooks2('MUVESZET', matslider.value)">Művészet</button>
+  <button class="btn btn-primary" (click)="getBooks2('FOZES', matslider.value)">Főzés</button>
+  <button class="btn btn-primary" (click)="getBooks2('ENCIKLOPEDIA', matslider.value)">Enciklopédia</button>
+  <button class="btn btn-primary" (click)="getBooks2('KOMEDIA', matslider.value)">Komédia</button>
+  <button class="btn btn-primary" (click)="getBooks2('SCIFI', matslider.value)">Sci-fi</button>
+<br><br>
 <hr>
-
-
+<p class="slidervalue">{{matslider.value}} Ft</p>
+<mat-slider [max]="maxPrice" [value]="value" [step]="steps" #matslider></mat-slider>
+<hr>
 <book *ngFor="let book of dbBooks" [book]="book"></book>
+

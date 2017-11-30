@@ -11,9 +11,15 @@ import {AppConstants} from "../app.constants";
 export class BookListComponent implements OnInit {
 
   dbBooks: Book[];
+  maxPrice: number;
+  value: number;
+  steps: number;
 
-
-  constructor(private http: Http){}
+  constructor(private http: Http){
+    this.value = 0;
+    this.maxPrice = 30000;
+    this.steps = 100;
+  }
 
   getBooks(ctg: String){
     this.http.get(AppConstants.API + '/getbooksbygenre?genre=' + ctg + '&maxprice=50000')
@@ -25,18 +31,18 @@ export class BookListComponent implements OnInit {
       );
   }
 
-  // getBooks(){
-  //   this.http.get(AppConstants.API + '/getbooksbygenre?genre=KALAND&maxprice=50000')
-  //     .subscribe(
-  //       (response: Response) => {
-  //         this.dbBooks = response.json();
-  //         console.log(this.dbBooks);
-  //       }
-  //     );
-  // }
-
+  getBooks2(ctg: String, pric: number){
+    this.http.get(AppConstants.API + '/getbooksbygenre?genre=' + ctg + '&maxprice=' + pric)
+      .subscribe(
+        (response: Response) => {
+          this.dbBooks = response.json();
+          console.log(this.dbBooks);
+        }
+      );
+  }
 
   ngOnInit() {
+    this.getBooks2('SCIFI', 5000);
   }
 
 }

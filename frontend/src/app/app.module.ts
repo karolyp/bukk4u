@@ -4,7 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatCheckboxModule, MatMenuModule, MatIconModule, MatButtonModule, MatFormFieldModule,
   MatInputModule, MatToolbarModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule, MatSidenavModule,
-  MatSliderModule, MatDatepickerModule, MatTabsModule
+  MatSliderModule, MatDatepickerModule, MatTabsModule, MatPaginatorModule
 } from '@angular/material';
 
 import {NgbModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
@@ -61,7 +61,8 @@ const appRoutes: Routes = [];
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MatPaginatorModule
   ],
   providers: [AuthenticationService, CookieService, BooklistingService],
 

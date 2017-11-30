@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
     'Horror', 'Egészség', 'Tudomány', 'Történelem', 'Matematika', 'Költészet',
     'Enciklopédia', 'Művészet', 'Fantasy'];
 
-  constructor(private booklistingService: BooklistingService) {
+  constructor() {
     this.value = 0;
     this.maxPrice = 20000;
     this.steps = 100;
